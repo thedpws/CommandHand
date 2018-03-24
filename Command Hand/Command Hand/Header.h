@@ -1,2 +1,2 @@
 #pragma once
-#include <opencv2/opencv.cpp>
+#include <opencv2/opencv.hpp>
