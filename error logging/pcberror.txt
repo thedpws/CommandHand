@@ -1,0 +1,14 @@
+'Command Hand.exe' (Win32): Loaded 'C:\Users\azvas\Documents\GitHub\CommandHand\Command Hand\x64\Debug\Command Hand.exe'. Symbols loaded.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\ntdll.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\kernel32.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\KernelBase.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\apphelp.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\vcruntime140d.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\ucrtbased.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Loaded 'C:\Windows\System32\ucrtbased.dll'. Cannot find or open the PDB file.
+'Command Hand.exe' (Win32): Unloaded 'C:\Windows\System32\ucrtbased.dll'
+The thread 0x2418 has exited with code 0 (0x0).
+The thread 0x4e34 has exited with code 0 (0x0).
+The thread 0x1468 has exited with code 0 (0x0).
+The thread 0x25b4 has exited with code -1073741510 (0xc000013a).
+The program '[1704] Command Hand.exe' has exited with code -1073741510 (0xc000013a).
