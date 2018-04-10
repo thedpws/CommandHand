@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0066)https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Camera — OpenCV 3.0.0-dev documentation_files/ga.js.download"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33108845-1']);
+  _gaq.push(['_setDomainName', 'opencv.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+  
+    
+    
+    <title>Camera — OpenCV 3.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="./Camera — OpenCV 3.0.0-dev documentation_files/default.css" type="text/css">
+    <link rel="stylesheet" href="./Camera — OpenCV 3.0.0-dev documentation_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '3.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="./Camera — OpenCV 3.0.0-dev documentation_files/jquery.js.download"></script>
+    <script type="text/javascript" src="./Camera — OpenCV 3.0.0-dev documentation_files/underscore.js.download"></script>
+    <script type="text/javascript" src="./Camera — OpenCV 3.0.0-dev documentation_files/doctools.js.download"></script>
+    <script type="text/javascript" src="./Camera — OpenCV 3.0.0-dev documentation_files/insertIframe.js.download"></script>
+    <link rel="top" title="OpenCV 3.0.0-dev documentation" href="https://docs.opencv.org/3.0-beta/index.html">
+    <link rel="up" title="stitching. Images stitching" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/stitching.html">
+    <link rel="next" title="Features Finding and Images Matching" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/matching.html">
+    <link rel="prev" title="High Level Functionality" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/high_level.html">
+    <link href="./Camera — OpenCV 3.0.0-dev documentation_files/css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+    <body><div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="https://docs.opencv.org/3.0-beta/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/matching.html" title="Features Finding and Images Matching" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/high_level.html" title="High Level Functionality" accesskey="P">previous</a> |</li>
+        <li><a href="https://docs.opencv.org/3.0-beta/index.html">OpenCV 3.0.0-dev documentation</a> »</li>
+          <li><a href="https://docs.opencv.org/3.0-beta/modules/refman.html">OpenCV API Reference</a> »</li>
+          <li><a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/stitching.html" accesskey="U">stitching. Images stitching</a> »</li> 
+      </ul>
+    </div>  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper" style="top: 0px;">
+            <p class="logo"><a href="https://docs.opencv.org/3.0-beta/index.html">
+              <img class="logo" src="./Camera — OpenCV 3.0.0-dev documentation_files/opencv-logo2.png" alt="Logo">
+            </a></p>
+<div id="searchbox" style="">
+  <h3>Quick search</h3>
+    <form class="search" action="https://docs.opencv.org/3.0-beta/search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h3><a href="https://docs.opencv.org/3.0-beta/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html#">Camera</a><ul>
+<li><a class="reference internal" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html#detail-cameraparams">detail::CameraParams</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/high_level.html" title="previous chapter">High Level Functionality</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/matching.html" title="next chapter">Features Finding and Images Matching</a></p>
+        </div>
+      </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="camera">
+<h1>Camera<a class="headerlink" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html#camera" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="detail-cameraparams">
+<h2>detail::CameraParams<a class="headerlink" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html#detail-cameraparams" title="Permalink to this headline">¶</a></h2>
+<dl class="struct">
+<dt id="detail::CameraParams">
+<em class="property">struct </em><tt class="descclassname">detail::</tt><tt class="descname">CameraParams</tt><a class="headerlink" href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/camera.html#detail::CameraParams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Describes camera parameters.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Translation is assumed to be zero during the whole stitching pipeline.</p>
+</div>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">struct</span> <span class="n">CV_EXPORTS</span> <span class="n">CameraParams</span>
+<span class="p">{</span>
+    <span class="n">CameraParams</span><span class="p">();</span>
+    <span class="n">CameraParams</span><span class="p">(</span><span class="k">const</span> <span class="n">CameraParams</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+    <span class="k">const</span> <span class="n">CameraParams</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">CameraParams</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+    <span class="n">Mat</span> <span class="n">K</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="kt">double</span> <span class="n">focal</span><span class="p">;</span> <span class="c1">// Focal length</span>
+    <span class="kt">double</span> <span class="n">aspect</span><span class="p">;</span> <span class="c1">// Aspect ratio</span>
+    <span class="kt">double</span> <span class="n">ppx</span><span class="p">;</span> <span class="c1">// Principal point X</span>
+    <span class="kt">double</span> <span class="n">ppy</span><span class="p">;</span> <span class="c1">// Principal point Y</span>
+    <span class="n">Mat</span> <span class="n">R</span><span class="p">;</span> <span class="c1">// Rotation</span>
+    <span class="n">Mat</span> <span class="n">t</span><span class="p">;</span> <span class="c1">// Translation</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="feedback">
+              <h2>Help and Feedback</h2>
+              You did not find what you were looking for?
+              <ul>
+                  
+                  
+                  
+                  <li>Ask a question on the <a href="http://answers.opencv.org/">Q&amp;A forum</a>.</li>
+                  <li>If you think something is missing or wrong in the documentation,
+                  please file a <a href="http://code.opencv.org/">bug report</a>.</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="https://docs.opencv.org/3.0-beta/genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/matching.html" title="Features Finding and Images Matching">next</a> |</li>
+        <li class="right">
+          <a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/high_level.html" title="High Level Functionality">previous</a> |</li>
+        <li><a href="https://docs.opencv.org/3.0-beta/index.html">OpenCV 3.0.0-dev documentation</a> »</li>
+          <li><a href="https://docs.opencv.org/3.0-beta/modules/refman.html">OpenCV API Reference</a> »</li>
+          <li><a href="https://docs.opencv.org/3.0-beta/modules/stitching/doc/stitching.html">stitching. Images stitching</a> »</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        © Copyright 2011-2014, opencv dev team.
+      Last updated on Nov 10, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      <a href="https://docs.opencv.org/3.0-beta/_sources/modules/stitching/doc/camera.txt" rel="nofollow">Show this page source.</a>
+    </div>
+  
+</body></html>
