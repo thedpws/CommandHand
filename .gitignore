@@ -733,3 +733,9 @@ __pycache__/
 
 
 # End of https://www.gitignore.io/api/c++,clion,opencv,eclipse,codeblocks,visualstudio
+CommandHand/CommandHand/targetver.h
+CommandHand/CommandHand/stdafx.h
+CommandHand/CommandHand/stdafx.cpp
+*.filters
+*.vcxproj
+*.sln
