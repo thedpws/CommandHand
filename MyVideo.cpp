@@ -1,19 +1,18 @@
 #include "MyVideo.h"
 
-int aifaofoa() {
-	return 0;
-}
 
 MyVideo::MyVideo()
 {
-	VideoCapture cap(0);
-	this->vc = cap;
+	VideoCapture vc(0);
+	this->vc = vc;
 	updateFrame();
 }
+
  bool MyVideo::updateFrame()
  {
 	 if (vc.isOpened()) 
 	 {
+		 currentFrame = NULL;
 		 vc >> currentFrame;
 		 return true;
 	 }
@@ -23,6 +22,20 @@ MyVideo::MyVideo()
 	 }
 }
 
- Mat MyVideo::getFrame() {
-	 return currentFrame;
+ Mat* MyVideo::getFrame() 
+ {
+	 updateFrame();
+	 return &currentFrame;
 }
+ int MyVideo::getHeight()
+ {
+	 return currentFrame.rows;
+}
+ int MyVideo::getWidth()
+ {
+	 return currentFrame.cols;
+ }
+ bool MyVideo::isOpened() 
+ {
+	 return vc.isOpened();
+ }

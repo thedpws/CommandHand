@@ -9,12 +9,12 @@ class MyVideo
 private:
 	VideoCapture vc;
 	Mat currentFrame;
-
 	bool updateFrame();
 public:
 	MyVideo();
-	Mat getFrame();
+	Mat* getFrame();
+	int getHeight();
+	int getWidth();
+	bool isOpened();
+
 };
-
-
-

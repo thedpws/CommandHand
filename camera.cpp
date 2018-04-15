@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace cv;
-
+/*
 int main() 
 {
 	VideoCapture cap(0);
@@ -38,3 +38,4 @@ int main()
 	}
 	return 0;
 }
+*/
