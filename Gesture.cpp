@@ -20,5 +20,10 @@ int Gesture::getID()
 
 int Gesture::setID(int id)
 {
+	if (id < 0) 
+	{
+		return -1;
+	}
 	this->id = id;
+	return 0;
 }

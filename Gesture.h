@@ -1,5 +1,4 @@
 #pragma once
-#include "Gesture.cpp"
 #include "Coordinates.h"
 
 class Gesture{
