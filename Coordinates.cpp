@@ -1,6 +1,6 @@
 #include "Coordinates.h"
 
-Coordinates::Coordinates(int x, int y) 
+Coordinates::Coordinates(int x, int y)
 {
 	this->x = x;
 	this->y = y;
@@ -12,7 +12,7 @@ Coordinates::Coordinates()
 	this->y = -1;
 }
 
-int Coordinates::getX() 
+int Coordinates::getX()
 {
 	return x;
 }

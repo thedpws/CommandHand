@@ -1,4 +1,5 @@
 #include "Gesture.h"
+#include "Coordinates.h"
 
 Gesture::Gesture()
 {
@@ -13,12 +14,18 @@ Coordinates* Gesture::getCoordinates()
 	return &coords;
 }
 
+void Gesture::setCoordinates(Coordinates* c)
+{
+	coords = *c;
+}
+
 int Gesture::getID()
 {
 	return id;
 }
 
-int Gesture::setID(int id)
+bool Gesture::setID(int id)
 {
 	this->id = id;
+	return true;
 }

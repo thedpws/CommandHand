@@ -1,5 +1,5 @@
 #pragma once
-#include "Gesture.cpp"
+//#include "Gesture.cpp"
 #include "Coordinates.h"
 
 class Gesture{
@@ -11,6 +11,7 @@ public:
 	Gesture();
 	void update();
 	Coordinates* getCoordinates();
+	void setCoordinates(Coordinates* coords);
 	int getID();
-	int setID(int id);
+	bool setID(int id);
 };
