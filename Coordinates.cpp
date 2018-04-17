@@ -2,19 +2,19 @@
 
 Coordinates::Coordinates(int x, int y)
 {
-	this->x = x;
-	this->y = y;
+	this -> x = x;
+	this -> y = y;
 }
 
 Coordinates::Coordinates()
 {
-	this->x = -1;
-	this->y = -1;
+	this -> x = -1;
+	this -> y = -1;
 }
 
 int Coordinates::getX()
 {
-	return x;
+	return this -> x;
 }
 
 int Coordinates::getY()
