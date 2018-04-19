@@ -8,6 +8,7 @@
 #include "GestureRecognition.h"
 #include "Gesture.h"
 #include "Drawer.h"
+#include "MyGUI.h"
 
 
 using namespace std;
@@ -28,6 +29,8 @@ int main()
 
 	Gesture* currentGesture;
 
+	// MyGUI::MyGUI();
+
 	while (char(waitKey(1)) != 'q' && mv.isOpened())
 	{
 		clk++;
@@ -37,7 +40,7 @@ int main()
 		currentGesture = gr.process(&curr);
 		if (curr.empty()) break;
 		Drawer::draw(curr, *currentGesture);
-		imshow("Video", curr);
+		cv::imshow("Video", curr);
 
 
 	}
