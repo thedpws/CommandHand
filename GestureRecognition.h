@@ -1,20 +1,13 @@
 #pragma once
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
-#include <opencv2/opencv.hpp>
-#include <opencv2/highgui.hpp>
-#include "Gesture.h"
 
-//#include "GestureRecognition.cpp"
-/*
-	Eventually, this class will return a Gesture* data.
+#include "GestureRecognition.cpp"
 
-*/
 class GestureRecognition
 {
-//private:
+private:
+	Mat * current;
 
 public:
-	GestureRecognition();
-	Gesture* process(cv::Mat* m);
 };

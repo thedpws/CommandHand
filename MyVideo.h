@@ -10,15 +10,6 @@ private:
 	VideoCapture vc;
 	Mat currentFrame;
 	bool updateFrame();
-	int clk = 0;
-
-
-	//GESTURE SPACE
-	bool debug = true;
-	void drawGS();
-	Point* p_high;
-	Point* p_low;
-	Scalar* color = new Scalar(0, 255, 0);
 public:
 	MyVideo();
 	Mat* getFrame();
