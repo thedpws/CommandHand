@@ -3,7 +3,7 @@
 
 #include "Coordinates.h"
 
-Coordinates* mapping(int screenX1, int screenY1, int ScreenX2, int ScreenY2,
+Coordinates* mapping(int screenX1, int screenY1, int screenX2, int screenY2,
   int xCoordinateToMap, int yCoordinateToMap)
   {
 
