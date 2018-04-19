@@ -1,16 +1,23 @@
 #include "Gesture.h"
+#include "Coordinates.h"
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
 
 Gesture::Gesture()
 {
-	Coordinates coords;
-	this->coords = coords;
+	p = new cv::Point(-1, -1);
 	id = -1;
 }
 void Gesture::update() {}
 
-Coordinates* Gesture::getCoordinates()
+cv::Point* Gesture::getPoint()
 {
-	return &coords;
+	return p;
+}
+
+void Gesture::setPoint(cv::Point* p)
+{
+	this->p = p;
 }
 
 int Gesture::getID()
@@ -18,7 +25,8 @@ int Gesture::getID()
 	return id;
 }
 
-int Gesture::setID(int id)
+bool Gesture::setID(int id)
 {
 	this->id = id;
+	return true;
 }

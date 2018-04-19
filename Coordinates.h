@@ -1,5 +1,6 @@
 #pragma once
-#include "Coordinates.cpp"
+//#include "Coordinates.cpp"
+
 class Coordinates 
 {
 private:
