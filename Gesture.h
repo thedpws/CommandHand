@@ -1,16 +1,19 @@
 #pragma once
-#include "Gesture.cpp"
+//#include "Gesture.cpp"
 #include "Coordinates.h"
+#include <opencv2/highgui.hpp>
+#include <opencv2/opencv.hpp>
 
 class Gesture{
 private:
-	Coordinates coords;
+	cv::Point* p;
 	int id;
 
 public:
 	Gesture();
 	void update();
-	Coordinates* getCoordinates();
+	cv::Point* getPoint();
+	void setPoint(cv::Point* p);
 	int getID();
-	int setID(int id);
+	bool setID(int id);
 };
