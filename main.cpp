@@ -8,6 +8,7 @@
 #include "GestureRecognition.h"
 #include "Gesture.h"
 #include "Drawer.h"
+#include "cvui.h"
 
 
 using namespace std;
