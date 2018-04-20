@@ -1,6 +1,5 @@
 #pragma once
 //#include "Gesture.cpp"
-#include "Coordinates.h"
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
