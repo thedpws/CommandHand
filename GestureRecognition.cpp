@@ -51,6 +51,7 @@ void GestureRecognition::hi_b_trackbar(int, void*)
 */
 Gesture* GestureRecognition::process(cv::Mat &m)
 {
+	cv::RNG rng(12345);
 	double shortest_dist = -1;
 	int shortest_x = -1;
 	int shortest_y = -1;
@@ -58,13 +59,21 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	cv::Mat src = m.clone();
 	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
 	cv::blur(m, m, cv::Size(ksize, ksize));
-	cv::threshold(m, m, 150, 255, 0);
-	/*
-	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
-	cv::blur(m, m, cv::Size(ksize, ksize));
-	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
-	*/
-
+	cv::threshold(m, m, 50, 255, 0);
+	
+	cv::Mat canny_output;
+	std::vector<std::vector<cv::Point>> contours;
+	std::vector<cv::Vec4i> hierarchy;
+	cv::Canny(m, canny_output, 100, 200, 3);
+	cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+	cv::Mat drawing = cv::Mat::zeros(canny_output.size(), CV_8UC3);
+	for (int i = 0; i < contours.size(); i++)
+	{
+		cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+		cv::drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
+	}
+	m = drawing;
+	
 	int gID, gX, gY;
 	gX = shortest_x;
 	gY = shortest_y;
