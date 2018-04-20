@@ -49,37 +49,22 @@ void GestureRecognition::hi_b_trackbar(int, void*)
 	cv::setTrackbarPos("High B", "Object Detection", hi_b);
 }
 */
-Gesture* GestureRecognition::process(cv::Mat* m)
+Gesture* GestureRecognition::process(cv::Mat &m)
 {
 	double shortest_dist = -1;
 	int shortest_x = -1;
 	int shortest_y = -1;
 
-	if (m == NULL) return NULL;
+	cv::Mat src = m.clone();
+	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
+	cv::blur(m, m, cv::Size(ksize, ksize));
+	cv::threshold(m, m, 150, 255, 0);
+	/*
+	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
+	cv::blur(m, m, cv::Size(ksize, ksize));
+	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), m);
+	*/
 
-	int x_center = m->cols / 2;
-	int y_center = m->rows / 2;
-
-	for (int cols = x_center - CommandHand::gs_width/2; cols < x_center + CommandHand::gs_width/2; cols++)
-	{
-		for (int rows = y_center - CommandHand::gs_height/2; rows < y_center + CommandHand::gs_height/2; rows++)
-		{
-			cv::Mat frame = *m;
-
-			cv::Vec3b intensity = m->at<cv::Vec3b>(rows, cols);
-
-			uchar b = intensity.val[0];
-			uchar g = intensity.val[1];
-			uchar r = intensity.val[2];
-			double curr_dist = std::sqrt(((255 - b) ^ 2) + ((255-g) ^ 2) + ((255-r) ^ 2));
-			if (curr_dist < shortest_dist || shortest_dist == -1)
-				{
-				shortest_dist = curr_dist;
-				shortest_x = cols;
-				shortest_y = rows;
-				}
-		}
-	}
 	int gID, gX, gY;
 	gX = shortest_x;
 	gY = shortest_y;
@@ -90,4 +75,47 @@ Gesture* GestureRecognition::process(cv::Mat* m)
 	g->setPoint(p);
 	return g;
 
+}
+
+void GestureRecognition::inRangeProcessing(cv::Mat* m)
+{
+	int x_center = m->cols / 2;
+	int y_center = m->rows / 2;
+
+	for (int cols = x_center - CommandHand::gs_width / 2; cols < x_center + CommandHand::gs_width / 2; cols++)
+	{
+		for (int rows = y_center - CommandHand::gs_height / 2; rows < y_center + CommandHand::gs_height / 2; rows++)
+		{
+			cv::Mat frame = *m;
+
+			cv::Vec3b intensity = m->at<cv::Vec3b>(rows, cols);
+
+			uchar b = intensity.val[0];
+			uchar g = intensity.val[1];
+			uchar r = intensity.val[2];
+
+			if (CommandHand::lo_b <= b &&
+				b <= CommandHand::hi_b &&
+				CommandHand::lo_g <= g &&
+				g <= CommandHand::hi_g &&
+				CommandHand::lo_r <= r &&
+				r <= CommandHand::hi_r
+				)
+			{
+				intensity.val[0] = 255;
+				intensity.val[1] = 255;
+				intensity.val[2] = 255;
+				m->at<cv::Vec3b>(rows, cols) = intensity;
+			}
+			else
+			{
+				intensity.val[0] = 0;
+				intensity.val[1] = 0;
+				intensity.val[2] = 0;
+				m->at<cv::Vec3b>(rows, cols) = intensity;
+			}
+
+
+		}
+	}
 }

@@ -25,6 +25,8 @@ private:
 	int lo_b;
 	int hi_b;
 
+	int ksize = 10;
+
 	void lo_r_trackbar(int, void*);
 	void hi_r_trackbar(int, void*);
 	void lo_g_trackbar(int, void*);
@@ -32,7 +34,8 @@ private:
 	void lo_b_trackbar(int, void*);
 	void hi_b_trackbar(int, void*);
 
+	void inRangeProcessing(cv::Mat* m);
 public:
 	GestureRecognition();
-	Gesture* process(cv::Mat* m);
+	Gesture* process(cv::Mat &m);
 };
