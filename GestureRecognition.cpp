@@ -102,7 +102,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 		}
 		else
 		{
-			//cv::drawContours(drawing, contours, i, cv::Scalar(0, 0, 255), 2, 8, hierarchy, 0, cv::Point());
+			cv::drawContours(drawing, contours, i, cv::Scalar(0, 0, 255), 2, 8, hierarchy, 0, cv::Point());
 		}
 	}
 	std::vector<cv::Point> contour = contours[i_largest_contour];
@@ -203,9 +203,9 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	*/
 
 	//OVERWRITING THE MAT
-	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows <= m.rows / 2 + CommandHand::gs_height / 2; rows++)
+	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows < m.rows / 2 + CommandHand::gs_height / 2; rows++)
 	{
-		for (int cols = m.cols / 2 - CommandHand::gs_width / 2; cols <= m.cols / 2 + CommandHand::gs_width / 2; cols++)
+		for (int cols = m.cols / 2 - CommandHand::gs_width / 2; cols < m.cols / 2 + CommandHand::gs_width / 2; cols++)
 		{
 			m.at<cv::Vec3b>(rows, cols) = drawing.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
 		}
