@@ -60,9 +60,9 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 
 	cv::Mat src(roi);
 	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), roi);
-	return new Gesture();
-	//cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
-	//cv::threshold(roi, roi, CommandHand::thresh, CommandHand::max_thresh, 0);
+	
+	cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
+	cv::threshold(roi, roi, CommandHand::thresh, 255, 0);
 	
 
 	cv::Mat canny_output;
@@ -102,7 +102,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 		}
 		else
 		{
-			cv::drawContours(drawing, contours, i, cv::Scalar(0, 0, 255), 2, 8, hierarchy, 0, cv::Point());
+			//cv::drawContours(drawing, contours, i, cv::Scalar(0, 0, 255), 2, 8, hierarchy, 0, cv::Point());
 		}
 	}
 	std::vector<cv::Point> contour = contours[i_largest_contour];

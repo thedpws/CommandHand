@@ -10,6 +10,11 @@ private:
 	static void on_min_b_thresh_trackbar(int, void *);
 	static void on_max_b_thresh_trackbar(int, void *);
 
+	static void on_ksize_thresh_trackbar(int, void*);
+
+	static void on_thresh_thresh_trackbar(int, void*);
+	static void on_max_thresh_thresh_trackbar(int, void*);
+
 	//default values for trackbars
 public:
 	static int runDebug();

@@ -23,18 +23,7 @@ int main()
 {
 	if (CommandHand::debug)
 	{
-		if (CommandHand::rgb_d)
-		{
-			return rgb_debug::runDebug();
-		}
-		if (CommandHand::blur_d)
-		{
-			return blur_debug::runDebug();
-		}
-		if (CommandHand::thresh_d)
-		{
-			return thresh_debug::runDebug();
-		}
+		return rgb_debug::runDebug();
 	}
 	else
 	{
