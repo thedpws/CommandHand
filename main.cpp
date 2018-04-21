@@ -11,6 +11,8 @@
 #include "CommandHand.h"
 
 #include "rgb_debug.h"
+#include "blur_debug.h"
+#include "thresh_debug.h"
 
 
 using namespace std;
@@ -24,6 +26,14 @@ int main()
 		if (CommandHand::rgb_d)
 		{
 			return rgb_debug::runDebug();
+		}
+		if (CommandHand::blur_d)
+		{
+			return blur_debug::runDebug();
+		}
+		if (CommandHand::thresh_d)
+		{
+			return thresh_debug::runDebug();
 		}
 	}
 	else

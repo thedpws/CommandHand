@@ -60,9 +60,9 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 
 	cv::Mat src(roi);
 	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), roi);
-	
-	cv::blur(roi, roi, cv::Size(ksize, ksize));
-	cv::threshold(roi, roi, 100, 255, 0);
+	return new Gesture();
+	//cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
+	//cv::threshold(roi, roi, CommandHand::thresh, CommandHand::max_thresh, 0);
 	
 
 	cv::Mat canny_output;
