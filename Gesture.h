@@ -7,7 +7,6 @@ class Gesture{
 private:
 	cv::Point* p;
 	int id;
-
 public:
 	Gesture();
 	void update();

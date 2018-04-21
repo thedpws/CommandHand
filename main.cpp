@@ -43,12 +43,14 @@ int main()
 
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
-			clk++;
+			//clk++;
 
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
 			currentGesture = gr.process(curr);
+			if (currentGesture == NULL) continue;
 			if (curr.empty()) break;
+			//if (currentGesture == NULL)
 			Drawer::draw(curr, *currentGesture);
 			imshow("Video", curr);
 

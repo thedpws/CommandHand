@@ -25,7 +25,7 @@ MyVideo::MyVideo()
 	 {
 		 
 		 vc >> currentFrame;
-		 if (debug)  rectangle(currentFrame, *p_low, *p_high, *color, 5,8,0);
+		 //if (debug)  rectangle(currentFrame, *p_low, *p_high, *color, 5,8,0);
 		 std::cout << p_high->x << std::endl;
 		 return true;
 	 }
