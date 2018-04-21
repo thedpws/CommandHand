@@ -17,54 +17,19 @@ GestureRecognition::GestureRecognition()
 {
 	cv::namedWindow("Object Detection", cv::WINDOW_NORMAL);
 }
-/*
-void GestureRecognition::lo_r_trackbar(int, void*)
-{
-	lo_r = std::min(hi_r - 1, lo_r);
-	cv::setTrackbarPos("Low R", "Object Detection", lo_r);
-}
-void GestureRecognition::hi_r_trackbar(int, void*)
-{
-	hi_r = std::max(hi_r, lo_r+1);
-	cv::setTrackbarPos("High R", "Object Detection", hi_r);
-}
-void GestureRecognition::lo_g_trackbar(int, void*)
-{
-	lo_g = std::min(hi_g - 1, lo_g);
-	cv::setTrackbarPos("Low G", "Object Detection", lo_g);
-}
-void GestureRecognition::hi_g_trackbar(int, void*)
-{
-	hi_g = std::max(hi_g, lo_g + 1);
-	cv::setTrackbarPos("High G", "Object Detection", hi_g);
-}
-void GestureRecognition::lo_b_trackbar(int, void*)
-{
-	lo_b = std::min(hi_b - 1, lo_b);
-	cv::setTrackbarPos("Low B", "Object Detection", lo_b);
-}
-void GestureRecognition::hi_b_trackbar(int, void*)
-{
-	hi_b = std::max(hi_b, lo_b + 1);
-	cv::setTrackbarPos("High B", "Object Detection", hi_b);
-}
-*/
+
 Gesture* GestureRecognition::process(cv::Mat &m)
 {
 	//roi - region of interest. this is the gesture space
 	cv::Mat roi(m, cv::Range(m.rows / 2 - CommandHand::gs_height / 2, m.rows / 2 + CommandHand::gs_height / 2), cv::Range(m.cols / 2 - CommandHand::gs_width / 2, m.cols / 2 + CommandHand::gs_width / 2));
-	cv::RNG rng(12345);
-	double shortest_dist = -1;
-	int shortest_x = -1;
-	int shortest_y = -1;
 
 	cv::Mat src(roi);
+
 	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), roi);
 	
 	cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
 	cv::threshold(roi, roi, CommandHand::thresh, 255, 0);
 	
-
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -79,7 +44,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	for (int i = 0; i < contours.size(); i++)
 	{
 		double area = cv::contourArea(contours[i]);
-		if (area > largest_area)
+		if (area >= largest_area)
 		{
 			i_largest_contour = i;
 			largest_area = area;
@@ -91,20 +56,16 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 
 	cv::Mat drawing = cv::Mat::zeros(canny_output.size(), CV_8UC3);
 	cv::Scalar color = cv::Scalar(255, 255, 255);
-	//cv::drawContours(drawing, contours, i_largest_contour, color, 3);
+	
 	for (int i = 0; i < contours.size(); i++)
 	{
-		//cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
 		//DRAW THE LARGEST CONTOUR
 		if (i == i_largest_contour)
 		{
 			cv::drawContours(drawing, contours, i, cv::Scalar(255, 0, 0), 2, 8, hierarchy, 0, cv::Point());
 		}
-		else
-		{
-			//cv::drawContours(drawing, contours, i, cv::Scalar(0, 0, 255), 2, 8, hierarchy, 0, cv::Point());
-		}
 	}
+
 	std::vector<cv::Point> contour = contours[i_largest_contour];
 	//creating the convex hull.
 	std::vector<std::vector<cv::Point>> hull(1);
@@ -212,8 +173,6 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	}
 	
 	int gID, gX, gY;
-	gX = shortest_x;
-	gY = shortest_y;
 	Gesture* g = new Gesture();
 	std::cout << gX << "\t" << gY << std::endl;
 	g->setID(simplified_hull_indices.size() - 2);
