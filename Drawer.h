@@ -15,5 +15,4 @@ class Drawer
 {
 public:
 	static bool draw(cv::Mat &m, Gesture g);
-
 };

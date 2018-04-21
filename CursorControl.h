@@ -2,14 +2,17 @@
 
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
+#include "Gesture.h"
+#include "Windows.h"
 
 class CursorControl
 {
 public:
 	int getCursorX();
 	int getCursorY();
-	void setCursorPos(cv::Point pos);
+	static void setCursor(cv::Mat videoFeed, cv::Point pos);
+	static void moveCursor(cv::Mat videoFeed, Gesture g);
+	static cv::Point mapPoint(int x1, int y1, int x2, int y2, cv::Point p);
 private:
-	cv::Point mapPoint(int x1, int y1, int x2, int y2, cv::Point p);
 	cv::Point cursorPos;
 };

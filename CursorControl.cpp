@@ -10,3 +10,19 @@ cv::Point CursorControl::mapPoint(int x1, int y1, int x2, int y2, cv::Point p)
 
     return cv::Point(x, y);
 }
+
+/*
+void moveCursor(cv::Mat videoFeed, Gesture g)
+{
+	cv::Size matSize = videoFeed.size();
+	cv::Point screenPos = CursorControl::mapPoint(
+		matSize.width, 
+		matSize.height,
+		GetSystemMetrics(SM_CXSCREEN), 
+		GetSystemMetrics(SM_CYSCREEN), 
+		*g.getPoint()
+	);
+	
+	SetCursorPos(screenPos.x, screenPos.y);
+}
+*/
