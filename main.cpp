@@ -43,7 +43,10 @@ int main()
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
 			//clk++;
-
+			if (GetKeyState('A') & 0x8000)
+			{
+				std::cout << "A" << std::endl;
+			}
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
 			currentGesture = gr.process(curr);

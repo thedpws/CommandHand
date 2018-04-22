@@ -9,13 +9,36 @@
 #include <opencv2/core/types.hpp>
 #include <opencv2/core/bufferpool.hpp>
 #include <opencv2/core/mat.inl.hpp>
+#include <opencv2/core/utility.hpp>
+#include <opencv2/imgcodecs.hpp>
 #include <stdlib.h>
 #include <opencv/highgui.h>
 #include <opencv/cv.h>
+#include <Windows.h>
+#include <iostream>
+#include <opencv2/shape/shape_distance.hpp>
+#include <fstream>
 
 GestureRecognition::GestureRecognition()
 {
 	cv::namedWindow("Object Detection", cv::WINDOW_NORMAL);
+	//OPEN_HAND_CONTOUR = { cv::Point(256, 110), cv::Point(231, 119), cv::Point(4, 5) };
+	//CLOSED_HAND_CONTOUR = { cv::Point(231, 119), cv::Point(231, 119), cv::Point(245, 122) };
+	/*
+	std::ifstream open_file("open_hand_contour.hand");
+	std::vector<cv::Point> sample(398);
+	open_file.read((char*) &(this->OPEN_HAND_CONTOUR), sizeof(sample));
+	open_file.close();
+	std::ifstream close_file("closed_hand_contour.hand");
+	std::vector<cv::Point> sample2(186);
+	close_file.read((char*) &(this->CLOSED_HAND_CONTOUR), sizeof(sample2));
+	close_file.close();
+	*/
+	std::vector<std::vector<cv::Point>> gestures(10);
+	this->gestures = gestures;
+	for (int i = 0; i < 10; i++) has[i] = false;
+	
+
 }
 
 Gesture* GestureRecognition::process(cv::Mat &m)
@@ -29,7 +52,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	
 	cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
 	cv::threshold(roi, roi, CommandHand::thresh, 255, 0);
-	
+	cv::Mat binary_mask(roi);
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -57,28 +80,45 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	cv::Mat drawing = cv::Mat::zeros(canny_output.size(), CV_8UC3);
 	cv::Scalar color = cv::Scalar(255, 255, 255);
 	
-	for (int i = 0; i < contours.size(); i++)
+	//Drawing the largest contour
+	cv::drawContours(drawing, contours, i_largest_contour, cv::Scalar(225, 0, 0), 2, 8, hierarchy, 0, cv::Point());
+	
+	//storing the largest contour as hand_contour
+	std::vector<cv::Point> hand_contour = contours[i_largest_contour];
+
+	// writing contour files
+	if (GetKeyState('0') & 0x8000)
 	{
-		//DRAW THE LARGEST CONTOUR
-		if (i == i_largest_contour)
+		gestures[0] = hand_contour;
+		has[0] = true;
+		/*
+		std::ofstream file_stream;
+		std::string file_name = "closed_hand_contour.hand";
+		file_stream.open(file_name);
+		file_stream << hand_contour;
+
+		std::cout << "Saved " << file_name << std::endl;
+		file_stream.close();
+		*/
+	}
+	for (int i = '0'; i <= '9'; i++)
+	{
+		if (GetKeyState(i) & 0x8000)
 		{
-			cv::drawContours(drawing, contours, i, cv::Scalar(255, 0, 0), 2, 8, hierarchy, 0, cv::Point());
+			int n = i - '0';
+			gestures[n] = hand_contour;
+			has[n] = true;
 		}
 	}
+	
 
-	std::vector<cv::Point> contour = contours[i_largest_contour];
 	//creating the convex hull.
 	std::vector<std::vector<cv::Point>> hull(1);
-	convexHull(cv::Mat(contours[i_largest_contour]), hull[0], false);
+	convexHull(cv::Mat(hand_contour), hull[0], false);
+	
+	//drawing the convex hull
 	cv::drawContours(drawing, hull, 0, cv::Scalar(255, 255, 255), 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
 	
-	//drawing green circles around each hull index
-	/*
-	for (int i = 0; i < hull[0].size(); i++)
-	{
-		cv::circle(drawing, hull[0][i], 5, cv::Scalar(0, 255, 0));
-	}
-	*/
 	
 	//creating clusters
 	std::vector<std::vector<cv::Point>> clusters;
@@ -142,26 +182,12 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 		simplified_hull_indices.push_back(cv::Point((int)x, (int)y));
 	}
 
-	std::cout << simplified_hull_indices.size() << std::endl;
-
 	//drawing big green circles around each cluster
 	for (int i = 0; i < simplified_hull_indices.size(); i++)
 	{
 		cv::circle(drawing, simplified_hull_indices[i], 10, cv::Scalar(0, 255, 0));
 	}
-	/* BROKEN
-	//finding convexity defects
-	std::vector<cv::Point> defects;
-	if (simplified_hull_indices.size() > 3) {
-		cv::convexityDefects(contours, simplified_hull_indices, defects);
-
-		//drawing convexity defects
-		for (int i = 0; i < defects.size(); i++)
-		{
-			cv::circle(drawing, defects[i], 10, cv::Scalar(0, 255, 0));
-		}
-	}
-	*/
+	
 
 	//OVERWRITING THE MAT
 	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows < m.rows / 2 + CommandHand::gs_height / 2; rows++)
@@ -171,12 +197,46 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 			m.at<cv::Vec3b>(rows, cols) = drawing.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
 		}
 	}
-	
+	//Comparing the contour to closed-hand or open-hand;
+	//the contour is called "hand_contour"
+	//cv::HausdorffDistanceExtractor* extractor = cv::createHausdorffDistanceExtractor();
+	//extractor.computerDistance()
+
+	float nness[10];
+	for (int i = 0; i < 10; i++)
+	{
+		if (has[i] == false)
+		{
+			nness[i] = 0;
+			continue;
+		}
+		nness[i] = cv::matchShapes(hand_contour, gestures[i], CV_CONTOURS_MATCH_I1, 0);
+		std::cout << nness[i] << "\t";
+	}
+	std::cout << std::endl;
+	//float openness = cv::matchShapes(hand_contour, OPEN_HAND_CONTOUR, CV_CONTOURS_MATCH_I1, 0);
+	//float closedness = cv::matchShapes(hand_contour, CLOSED_HAND_CONTOUR, CV_CONTOURS_MATCH_I1, 0);
+
 	int gID, gX, gY;
 	Gesture* g = new Gesture();
-	std::cout << gX << "\t" << gY << std::endl;
-	g->setID(simplified_hull_indices.size() - 2);
-	g->setPoint(new cv::Point(-1,-1));
+	//std::cout << gX << "\t" << gY << std::endl;
+	float least_dist = -1;
+	for (int i = 0; i < 10; i++)
+	{
+		if (!has[i]) continue;
+		if (least_dist == -1 || least_dist > nness[i])
+		{
+			least_dist = nness[i];
+			gID = i;
+		}
+	}
+
+	cv::Moments mm = cv::moments(hand_contour);
+	gX = mm.m10 / mm.m00 + m.cols / 2 - CommandHand::gs_width/2;
+	gY = mm.m01 / mm.m00 + m.rows / 2 - CommandHand::gs_height/2;
+
+	g->setID(gID);
+	g->setPoint(new cv::Point(gX, gY));
 	return g;
 
 }
