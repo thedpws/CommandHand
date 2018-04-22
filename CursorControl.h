@@ -13,7 +13,7 @@ public:
 	static void setCursor(cv::Mat videoFeed, cv::Point pos);
 	static void moveCursor(cv::Mat videoFeed, Gesture g);
 	static cv::Point mapPoint(int x1, int y1, int x2, int y2, cv::Point p);
-	static void cursorClick(cv::point cursorPos);
+	static void cursorClick();
 private:
 	cv::Point cursorPos;
 };
