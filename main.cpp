@@ -14,7 +14,7 @@
 #include "blur_debug.h"
 #include "thresh_debug.h"
 
-#include "mainwindow.h"
+#include "QtGUI.h"
 #include <QtWidgets/QApplication>
 
 using namespace std;
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 {
 	// Initialize Qt GUI
 	QApplication a(argc, argv);
-	MainWindow w;
+	QtGUI w;
 	w.show();
 
 	// 
