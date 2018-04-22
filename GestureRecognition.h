@@ -17,11 +17,7 @@ class GestureRecognition
 {
 private:
 	//ofstream file_stream;
-	std::vector<cv::Point> triangle = {
-		cv::Point(200, 200),
-		cv::Point(200, 250),
-		cv::Point(250, 200),
-	};
+
 	std::vector<std::vector<cv::Point>> gestures;
 	bool has[10];
 	int lo_r;
@@ -33,7 +29,8 @@ private:
 	int lo_b;
 	int hi_b;
 
-	int ksize = 10;
+	int ksize;
+	int thresh;
 
 	void lo_r_trackbar(int, void*);
 	void hi_r_trackbar(int, void*);

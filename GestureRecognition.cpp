@@ -37,6 +37,8 @@ GestureRecognition::GestureRecognition()
 	std::vector<std::vector<cv::Point>> gestures(10);
 	this->gestures = gestures;
 	for (int i = 0; i < 10; i++) has[i] = false;
+
+	//std::istringstream config_file(con)
 	
 
 }
@@ -86,21 +88,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	//storing the largest contour as hand_contour
 	std::vector<cv::Point> hand_contour = contours[i_largest_contour];
 
-	// writing contour files
-	if (GetKeyState('0') & 0x8000)
-	{
-		gestures[0] = hand_contour;
-		has[0] = true;
-		/*
-		std::ofstream file_stream;
-		std::string file_name = "closed_hand_contour.hand";
-		file_stream.open(file_name);
-		file_stream << hand_contour;
-
-		std::cout << "Saved " << file_name << std::endl;
-		file_stream.close();
-		*/
-	}
+	//saving the contours
 	for (int i = '0'; i <= '9'; i++)
 	{
 		if (GetKeyState(i) & 0x8000)
@@ -197,11 +185,8 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 			m.at<cv::Vec3b>(rows, cols) = drawing.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
 		}
 	}
-	//Comparing the contour to closed-hand or open-hand;
-	//the contour is called "hand_contour"
-	//cv::HausdorffDistanceExtractor* extractor = cv::createHausdorffDistanceExtractor();
-	//extractor.computerDistance()
-
+	
+	//object recognition
 	float nness[10];
 	for (int i = 0; i < 10; i++)
 	{
@@ -214,8 +199,6 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 		std::cout << nness[i] << "\t";
 	}
 	std::cout << std::endl;
-	//float openness = cv::matchShapes(hand_contour, OPEN_HAND_CONTOUR, CV_CONTOURS_MATCH_I1, 0);
-	//float closedness = cv::matchShapes(hand_contour, CLOSED_HAND_CONTOUR, CV_CONTOURS_MATCH_I1, 0);
 
 	int gID, gX, gY;
 	Gesture* g = new Gesture();
@@ -230,6 +213,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 			gID = i;
 		}
 	}
+	if (least_dist > 1) gID = -1;
 
 	cv::Moments mm = cv::moments(hand_contour);
 	gX = mm.m10 / mm.m00 + m.cols / 2 - CommandHand::gs_width/2;

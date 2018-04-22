@@ -11,11 +11,9 @@
 #include "CommandHand.h"
 
 #include "rgb_debug.h"
-#include "blur_debug.h"
-#include "thresh_debug.h"
 
-#include "QtGUI.h"
-#include <QtWidgets/QApplication>
+//#include "QtGUI.h"
+//#include <QtWidgets/QApplication>
 
 using namespace std;
 using namespace cv;
@@ -24,9 +22,9 @@ using namespace cv;
 int main(int argc, char *argv[])
 {
 	// Initialize Qt GUI
-	QApplication a(argc, argv);
-	QtGUI w;
-	w.show();
+	//QApplication a(argc, argv);
+	//QtGUI w;
+	//w.show();
 
 	// 
 
@@ -52,10 +50,6 @@ int main(int argc, char *argv[])
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
 			//clk++;
-			if (GetKeyState('A') & 0x8000)
-			{
-				std::cout << "A" << std::endl;
-			}
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
 			currentGesture = gr.process(curr);
