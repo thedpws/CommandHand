@@ -14,13 +14,19 @@
 #include "blur_debug.h"
 #include "thresh_debug.h"
 
+#include "CommandHandGui.h"
+#include <QtWidgets/QApplication>
 
 using namespace std;
 using namespace cv;
 
 
-int main()
+int main(int argc, char *argv[])
 {
+	QApplication a(argc, argv);
+	CommandHandGui w;
+	w.show();
+
 	if (CommandHand::debug)
 	{
 		return rgb_debug::runDebug();
