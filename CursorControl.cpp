@@ -26,3 +26,16 @@ void moveCursor(cv::Mat videoFeed, Gesture g)
 	SetCursorPos(screenPos.x, screenPos.y);
 }
 */
+
+void cursorClick()
+{
+	//creates a stream of inputs that is a left click on the mouse
+	//it should use the current position of the mouse
+	INPUT inputs[2] = {0};
+	inputs[0].type = INPUT_MOUSE;
+	inputs[0].mi.dwflags = MOUSEEVENTF_LEFTDOWN;
+	inputs[1].type = INPUT_MOUSE;
+	inputs[1].mi.dwflags = MOUSEEVENTF_LEFTUP;
+	
+	SendInput(2, INPUTS, sizeof(INPUT);
+}
