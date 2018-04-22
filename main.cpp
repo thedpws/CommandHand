@@ -14,7 +14,7 @@
 #include "blur_debug.h"
 #include "thresh_debug.h"
 
-#include "CommandHandGui.h"
+#include "mainwindow.h"
 #include <QtWidgets/QApplication>
 
 using namespace std;
@@ -23,9 +23,12 @@ using namespace cv;
 
 int main(int argc, char *argv[])
 {
+	// Initialize Qt GUI
 	QApplication a(argc, argv);
-	CommandHandGui w;
+	MainWindow w;
 	w.show();
+
+	// 
 
 	if (CommandHand::debug)
 	{
