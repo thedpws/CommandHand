@@ -4,7 +4,7 @@
 using namespace cv;
 
 
-class MyVideo
+class MyVideo 
 {
 private:
 	VideoCapture vc;

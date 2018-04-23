@@ -9,41 +9,30 @@ MyVideo::MyVideo()
 	VideoCapture vc(0);
 	this->vc = vc;
 	vc >> current_frame;
-
-	//Creates the Gesture Space
+	//create the Gesture Space.
 	int x_center = current_frame.cols/2;
 	int y_center = current_frame.rows/2;
-	p_high = new Point(x_center + CommandHand::gs_width / 2, y_center + CommandHand::gs_height/2);
-	p_low = new Point(x_center - CommandHand::gs_width / 2, y_center - CommandHand::gs_height / 2);
-
-
+	
+	
 }
 
 //Updates the video frame
  bool MyVideo::updateFrame()
  {
-	 if (vc.isOpened())
+	 if (vc.isOpened()) 
 	 {
-
-		 vc >> current_frame;
 		 cv::Mat m;
 		 vc >> m;
 		 cv::flip(m, m, 1);
 		 current_frame = m;
 		 return true;
 	 }
-	 else
+	 else 
 	 {
 		 return false;
 	 }
 }
 
-//Returns the current video frame
- Mat* MyVideo::getFrame()
- {
-	 updateFrame();
-	 return &current_frame;
- }
 
 //Returns the height of the video frame
  int MyVideo::getHeight()
@@ -51,7 +40,11 @@ MyVideo::MyVideo()
 	 return current_frame.rows;
  }
 
-//Returns the width of the video frame
+ Mat* MyVideo::getFrame() 
+ {
+	 updateFrame();
+	 return &current_frame;
+}
  int MyVideo::getWidth()
  {
 	 return current_frame.cols;

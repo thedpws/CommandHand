@@ -21,9 +21,7 @@ int blur_debug::runDebug()
 	while ((char)cv::waitKey(1) != 'q') {
 		cap >> frame;
 		if (frame.empty())
-		{
 			break;
-		}
 		cv::Scalar lo_gbr(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r);
 		cv::Scalar hi_gbr(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r);
 		inRange(frame, lo_gbr, hi_gbr, frame_threshold);

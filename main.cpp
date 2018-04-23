@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	QtGUI* w = new QtGUI;
 	w->show();
 
-	//
+	// 
 
 	if (CommandHand::debug)
 	{
@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+		int clk = 0;
 
 		MyVideo mv;
 		VideoCapture vc(0);
@@ -64,8 +65,10 @@ int main(int argc, char *argv[])
 
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
+			current_gesture = gr.process(curr);
+			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
-			//if (current_gesture == NULL)
+			//if (currentGesture == NULL)
 			Drawer::draw(curr, *current_gesture);
 			imshow("Video", curr);
 
@@ -74,5 +77,5 @@ int main(int argc, char *argv[])
 		}
 		return 0;
 	}
-
+	
 }

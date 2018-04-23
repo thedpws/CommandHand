@@ -1,5 +1,4 @@
 #pragma once
-
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
@@ -28,7 +27,7 @@ int thresh_debug::runDebug()
 		inRange(frame, lo_gbr, hi_gbr, frame_threshold);
 		cv::blur(frame_threshold, frame_threshold, cv::Size(CommandHand::ksize, CommandHand::ksize));
 		cv::threshold(frame_threshold, frame_threshold, thresh, max_thresh, cv::THRESH_BINARY);
-
+		
 		cv::imshow("original mat", frame);
 		cv::imshow("binary mat", frame_threshold);
 	}

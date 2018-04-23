@@ -8,7 +8,7 @@ using namespace cv;
 
 bool Drawer::draw(cv::Mat &m, Gesture g)
 {
-	//Draws a circle around the coordinates of the gesture
+	//draw a circle around the coordinates of the gesture.
 	Scalar* red = new Scalar(0, 0, 255);
 	if (g.getID() == -1) return false;
 	circle(m, *g.getPoint(), 5, *red, 5, 8, 0);
@@ -54,6 +54,11 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	text_origin.y -= text_size.height + baseline;
 	putText(m, gesture_ID_buffer, text_origin, font_face, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
 
-	return true;
+	// Create text for Gesture and Cursor Coords
+	int MatSizeX = m.cols;
+	int MatSizeY = m.rows;
+	Point textOrigin;
+	std::string TextToPrint;
+	int fontFace = FONT_HERSHEY_SCRIPT_SIMPLEX;
 
 }
