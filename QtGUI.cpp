@@ -41,7 +41,6 @@ QtGUI::QtGUI(QWidget *parent):
 
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
-	capture.read(raw);
 	// Check if successfully stored
 	if (raw->empty() || processed->empty())
 	{
