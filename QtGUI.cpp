@@ -78,9 +78,9 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	ui.BlueMinValue->clear();
 	ui.BlueMinValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
 	ui.KSizeValue->clear();
-	ui.KSizeValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
+	ui.KSizeValue->appendPlainText(QString::number(ui.KSizeSlider->value()));
 	ui.ThresholdValue->clear();
-	ui.ThresholdValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
+	ui.ThresholdValue->appendPlainText(QString::number(ui.ThresholdSlider->value()));
 
 	// Update internal values from sliders
 	RMax = ui.RedMaxSlider->value();
@@ -93,7 +93,17 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	Threshold = ui.ThresholdSlider->value();
 
 	// Update Gesture data and Cursor position boxes
-	int CursorX = 
+
+	/*
+	POINT cursorPos;
+	GetCursorPos(&cursorPos);
+	ui.CursorCoordValue->appendPlainText("(" + QString::number(cursorPos.x) + " , " + QString::number(cursorPos.y) + ")");
+
+	cv::Point* gesturePos;
+	ui.GestureCoordValue->appendPlainText("(" + QString::number(cursorPos.x) + " , " + QString::number(cursorPos.y) + ")");
+
+	ui.GestureIDValue->appendPlainText(QString::number(gestureID));
+	*/
 }
 
 void QtGUI::on_PauseButton_clicked()
