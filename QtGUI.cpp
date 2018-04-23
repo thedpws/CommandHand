@@ -44,8 +44,8 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 	// OpenCV to QImage datatype to display on labels
 	cv::inRange(*processed, cv::Scalar(BMin, GMin, RMin), cv::Scalar(BMax, GMax, RMax), *processed);
-	if (KSize > 0) cv::blur(*processed, *processed, cv::Size(KSize, KSize));
-	if (Thresh > 0) cv::threshold(*processed, *processed, Thresh, 255, 0);
+	if (this->KSize > 0) cv::blur(*processed, *processed, cv::Size(KSize, KSize));
+	if (Threshold > 0) cv::threshold(*processed, *processed, Threshold, 255, 0);
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images

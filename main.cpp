@@ -63,7 +63,9 @@ int main(int argc, char *argv[])
 			gr.setHiG(w->getGMaxValue());
 			gr.setLoR(w->getRMinValue());
 			gr.setHiR(w->getRMaxValue());
-			gr.set
+			gr.setKSize(w->getKSize());
+			gr.setThreshSize(w->getThreshold());
+
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
