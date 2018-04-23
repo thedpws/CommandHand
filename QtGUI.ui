@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>600</height>
+    <width>1920</width>
+    <height>1084</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>420</x>
       <y>0</y>
-      <width>851</width>
-      <height>381</height>
+      <width>1491</width>
+      <height>781</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -286,70 +286,24 @@
      <string>Blue Max</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="LoopValue">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>420</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="PauseButton">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>400</y>
-      <width>221</width>
-      <height>121</height>
+      <x>1140</x>
+      <y>820</y>
+      <width>361</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="text">
      <string>Pause</string>
     </property>
    </widget>
-   <widget class="QLabel" name="LoopLabel">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>400</y>
-      <width>81</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Loop Time (ms)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="FPSLabel">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>470</y>
-      <width>81</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>FPS</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="FPSValue">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>490</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="GestureIDLabel">
     <property name="geometry">
      <rect>
-      <x>1056</x>
-      <y>412</y>
+      <x>1540</x>
+      <y>832</y>
       <width>61</width>
       <height>21</height>
      </rect>
@@ -361,8 +315,8 @@
    <widget class="QPlainTextEdit" name="GestureIDValue">
     <property name="geometry">
      <rect>
-      <x>1130</x>
-      <y>400</y>
+      <x>1614</x>
+      <y>820</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -376,8 +330,8 @@
    <widget class="QPlainTextEdit" name="GestureCoordValue">
     <property name="geometry">
      <rect>
-      <x>1130</x>
-      <y>448</y>
+      <x>1614</x>
+      <y>868</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -386,8 +340,8 @@
    <widget class="QLabel" name="GestureCoordLabel">
     <property name="geometry">
      <rect>
-      <x>1036</x>
-      <y>460</y>
+      <x>1520</x>
+      <y>880</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -399,8 +353,8 @@
    <widget class="QPlainTextEdit" name="CursorCoordValue">
     <property name="geometry">
      <rect>
-      <x>1130</x>
-      <y>498</y>
+      <x>1614</x>
+      <y>918</y>
       <width>91</width>
       <height>41</height>
      </rect>
@@ -409,8 +363,8 @@
    <widget class="QLabel" name="CursorCoordLabel">
     <property name="geometry">
      <rect>
-      <x>1036</x>
-      <y>510</y>
+      <x>1520</x>
+      <y>930</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -430,7 +384,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>1920</width>
      <height>21</height>
     </rect>
    </property>
