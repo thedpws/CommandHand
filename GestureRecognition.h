@@ -15,6 +15,7 @@
 	to create threshold
 
 */
+
 class GestureRecognition
 {
 private:

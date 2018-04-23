@@ -15,44 +15,44 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 
 	// Creates text for Gesture ID
 	// Creates text for Gesture and Cursor Coords
-	int MatSizeX = m.cols;
-	int MatSizeY = m.rows;
-	Point textOrigin;
-	std::string TextToPrint;
-	int fontFace = FONT_HERSHEY_SCRIPT_SIMPLEX;
+	int mat_size_x = m.cols;
+	int mat_size_y = m.rows;
+	Point text_origin;
+	std::string text_to_print;
+	int font_face = FONT_HERSHEY_SCRIPT_SIMPLEX;
 
 	// Generates FPS Text
-	TextToPrint = std::to_string(37);
+	text_to_print = std::to_string(37);
 	int baseline = 0;
-	Size text_size = cv::getTextSize(TextToPrint, fontFace, TEXT_SCALING, TEXT_THICCNESS, &baseline);
-	textOrigin.x = MatSizeX - text_size.width;
-	textOrigin.y = MatSizeY;
-	putText(m, TextToPrint, textOrigin, fontFace, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
+	Size text_size = cv::getTextSize(text_to_print, font_face, TEXT_SCALING, TEXT_THICCNESS, &baseline);
+	text_origin.x = mat_size_x - text_size.width;
+	text_origin.y = mat_size_y;
+	putText(m, text_to_print, text_origin, font_face, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
 
 	// Generates Cursor Coordinate Text
-	int sprintfSuccess;
-	char cursorCoords[50];
-	sprintfSuccess = std::sprintf(cursorCoords, "Cursor at (%d,%d)", 50, 50);
-	text_size = cv::getTextSize(cursorCoords, fontFace, TEXT_SCALING, TEXT_THICCNESS, &baseline);
-	textOrigin.x = MatSizeX - text_size.width;
-	textOrigin.y -= text_size.height + baseline;
-	putText(m, cursorCoords, textOrigin, fontFace, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
+	int sprintf_success;
+	char cursor_coords[50];
+	sprintf_success = std::sprintf(cursor_coords, "Cursor at (%d,%d)", 50, 50);
+	text_size = cv::getTextSize(cursor_coords, font_face, TEXT_SCALING, TEXT_THICCNESS, &baseline);
+	text_origin.x = mat_size_x - text_size.width;
+	text_origin.y -= text_size.height + baseline;
+	putText(m, cursor_coords, text_origin, font_face, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
 
 	// Generates Gesture Text
-	char gestureCoords[50];
-	sprintfSuccess = std::sprintf(gestureCoords, "Gesture at (%d,%d)", g.getPoint() -> x, g.getPoint() -> y);
-	text_size = cv::getTextSize(gestureCoords, fontFace, TEXT_SCALING, TEXT_THICCNESS, &baseline);
-	textOrigin.x = MatSizeX - text_size.width;
-	textOrigin.y -= text_size.height + baseline;
-	putText(m, gestureCoords, textOrigin, fontFace, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
+	char gesture_coords[50];
+	sprintf_success = std::sprintf(gesture_coords, "Gesture at (%d,%d)", g.getPoint() -> x, g.getPoint() -> y);
+	text_size = cv::getTextSize(gesture_coords, font_face, TEXT_SCALING, TEXT_THICCNESS, &baseline);
+	text_origin.x = mat_size_x - text_size.width;
+	text_origin.y -= text_size.height + baseline;
+	putText(m, gesture_coords, text_origin, font_face, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
 
 	// Displays Gesture ID
-	char gestureIDBuffer[50];
-	sprintfSuccess = std::sprintf(gestureIDBuffer, "Gesture ID: %d", g.getID());
-	text_size = cv::getTextSize(gestureIDBuffer, fontFace, TEXT_SCALING, TEXT_THICCNESS, &baseline);
-	textOrigin.x = MatSizeX - text_size.width;
-	textOrigin.y -= text_size.height + baseline;
-	putText(m, gestureIDBuffer, textOrigin, fontFace, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
+	char gesture_ID_buffer[50];
+	sprintf_success = std::sprintf(gesture_ID_buffer, "Gesture ID: %d", g.getID());
+	text_size = cv::getTextSize(gesture_ID_buffer, font_face, TEXT_SCALING, TEXT_THICCNESS, &baseline);
+	text_origin.x = mat_size_x - text_size.width;
+	text_origin.y -= text_size.height + baseline;
+	putText(m, gesture_ID_buffer, text_origin, font_face, TEXT_SCALING, Scalar(255.f, 0.f, 0.f), TEXT_THICCNESS, 8);
 
 	return true;
 
