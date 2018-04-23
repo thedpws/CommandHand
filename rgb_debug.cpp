@@ -1,7 +1,8 @@
 #include "rgb_debug.h"
+#include "CommandHand.h"
+
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
-#include "CommandHand.h"
 
 int min_r = CommandHand::lo_r;
 int min_g = CommandHand::lo_g;

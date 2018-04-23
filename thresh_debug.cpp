@@ -2,6 +2,7 @@
 
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
+
 #include "thresh_debug.h"
 #include "CommandHand.h"
 

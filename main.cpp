@@ -3,13 +3,13 @@
 #include <opencv/highgui.h>
 
 #include <Windows.h>
-#include "MyVideo.h"
 #include <iostream>
+
+#include "MyVideo.h"
 #include "GestureRecognition.h"
 #include "Gesture.h"
 #include "Drawer.h"
 #include "CommandHand.h"
-
 #include "rgb_debug.h"
 
 #include "QtGUI.h"

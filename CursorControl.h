@@ -2,6 +2,7 @@
 
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
+
 #include "Gesture.h"
 #include "Windows.h"
 
