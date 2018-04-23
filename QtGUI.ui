@@ -49,6 +49,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -61,6 +64,9 @@
       <width>160</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -75,6 +81,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -87,6 +96,9 @@
       <width>161</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -101,6 +113,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -113,6 +128,9 @@
       <width>160</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
