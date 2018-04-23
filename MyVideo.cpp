@@ -1,5 +1,6 @@
 #include "MyVideo.h"
 #include "CommandHand.h"
+#include <opencv2/imgproc.hpp>
 #include <iostream>
 
 
@@ -7,6 +8,7 @@ MyVideo::MyVideo()
 {
 	VideoCapture vc(0);
 	this->vc = vc;
+	cv::Mat unflipped;
 	vc >> currentFrame;
 
 	//create the Gesture Space.
@@ -24,7 +26,11 @@ MyVideo::MyVideo()
 	 if (vc.isOpened()) 
 	 {
 		 
-		 vc >> currentFrame;
+		 cv::Mat m;
+		 vc >> m;
+		 cv::flip(m, m, 1);
+		 currentFrame = m;
+
 		 //if (debug)  rectangle(currentFrame, *p_low, *p_high, *color, 5,8,0);
 		 //std::cout << p_high->x << std::endl;
 		 return true;

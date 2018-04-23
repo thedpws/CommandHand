@@ -1,14 +1,17 @@
 #include "CursorControl.h"
+#include "CommandHand.h"
 
-cv::Point CursorControl::mapPoint(int x1, int y1, int x2, int y2, cv::Point p)
+cv::Point CursorControl::mapPoint(double x1, double y1, double x2, double y2, cv::Point p)
 {
   //Given x and y coordinates of two different sized screens, return new coordinates that maps
   //and scales what the display on the first screen is showing onto the second screen
+	double kx = 4;
+	double ky = 10;
+	double x = ((double)(p.x) - x1 / 2) * x2 * kx / x1 + x2 / 2;
+	double y = ((double)(p.y) - y1 / 2) * y2 * ky / y1 + y2 / 2;
 
-    int x = (double)p.x / (double)x1 * (double)x2;
-    int y = (double)p.y / (double)y1 * (double)y2;
-
-    return cv::Point(x, y);
+	std::cout << p.x << "\t" << x << "\t\t" << p.y << "\t" << y << std::endl;
+    return cv::Point((int)x, (int)y);
 }
 
 /*
@@ -26,7 +29,7 @@ void moveCursor(cv::Mat videoFeed, Gesture g)
 	SetCursorPos(screenPos.x, screenPos.y);
 }
 */
-
+/*
 void cursorClick()
 {
 	//creates a stream of inputs that is a left click on the mouse
@@ -38,4 +41,22 @@ void cursorClick()
 	inputs[1].mi.dwflags = MOUSEEVENTF_LEFTUP;
 	
 	SendInput(2, INPUTS, sizeof(INPUT);
+}
+*/
+
+void CursorControl::setCursorPos(cv::Point p)
+{
+	SetCursorPos(p.x, p.y);
+}
+
+void CursorControl::update(cv::Mat m, Gesture g)
+{
+	int x1 = m.cols;
+	int y1 = m.rows;
+
+	int x2 = GetSystemMetrics(SM_CXSCREEN);
+	int y2 = GetSystemMetrics(SM_CYSCREEN);
+
+	cv::Point mapped = mapPoint(x1, y1, x2, y2, *g.getPoint());
+	SetCursorPos(mapped.x, mapped.y);
 }

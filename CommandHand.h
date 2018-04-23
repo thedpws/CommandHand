@@ -7,6 +7,10 @@ class CommandHand
 public:
 	const static int gs_height = 300;
 	const static int gs_width = 500;
+
+	const static int cs_height = 100;
+	const static int cs_width = 300;
+
 	const static bool debug = false;
 	
 	const static int thresh = 62;
