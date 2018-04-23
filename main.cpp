@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
 		//internal clock for calculations
 		int clk = 0;
 
+		//interface for getting frames
 		MyVideo mv;
-	
-		VideoCapture vc(0);
+		
 		
 		if (!mv.isOpened())
 		{
@@ -53,8 +53,10 @@ int main(int argc, char *argv[])
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
 
+			//image file without processing
 			Mat raw = curr.clone();
 
+			//image file with processing
 			Mat to_be_processed = raw.clone();
 			/*
 			gr.setLoB(w->getBMinValue());
@@ -74,9 +76,10 @@ int main(int argc, char *argv[])
 			gr.setThreshSize(w->getThreshold());
 			*/
 			
-
+			//send the image to "GestureRecognition" and return a gesture
 			current_gesture = gr.process(curr);
 			
+			//if recognition failed
 			if (current_gesture == NULL)
 			{
 				continue;
@@ -86,14 +89,17 @@ int main(int argc, char *argv[])
 				break;
 			}
 			
+			//draw the center of mass + debug info
 			Drawer::draw(curr, *current_gesture);
 			
 			//w->processFrameAndUpdateGUI(&raw, &curr);
 
+			//display the video feed
 			imshow("Video", curr);
 
 			CursorControl::update(curr, *current_gesture);
 			
+			//Q key will stop the program
 			if (GetKeyState('Q') & 0x8000)
 			{
 				return 3;

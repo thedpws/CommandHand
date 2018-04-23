@@ -22,8 +22,10 @@ private:
 
 	std::vector<std::vector<cv::Point>> gestures;
 	
+	//bool array so we know what gesture ID's are occupied
 	bool has[10];
 	
+	//mins and maxs for the inrange function
 	int lo_r = CommandHand::lo_r;
 	
 	int hi_r = CommandHand::hi_r;
@@ -36,10 +38,13 @@ private:
 	
 	int hi_b = CommandHand::hi_b;
 
+	//blurring kernel size
 	int ksize = CommandHand::ksize;
 	
+	//thresholding size
 	int thresh = CommandHand::thresh;
-
+	
+	//callback methods
 	void lo_r_trackbar(int, void*);
 	
 	void hi_r_trackbar(int, void*);
@@ -53,20 +58,18 @@ private:
 	void hi_b_trackbar(int, void*);
 
 	void inRangeProcessing(cv::Mat* m);
-
-	std::vector<cv::Point> open_hand_contour;
-	
-	std::vector<cv::Point> closed_hand_contour;
 	
 	cv::Mat binary_mask;
 
 public:
 	GestureRecognition();
-	
+	 //accessor
 	cv::Mat getBinaryMask();
 	
+	//the main functionality of the class
 	Gesture* process(cv::Mat &m);
 	
+	//mutators
 	void setHiR(int i);
 	
 	void setLoR(int i);

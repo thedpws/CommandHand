@@ -6,6 +6,7 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
+//mins and maxs for the inrange binary mask function
 int min_r = CommandHand::lo_r;
 
 int min_g = CommandHand::lo_g;
@@ -18,13 +19,16 @@ int max_g = CommandHand::hi_g;
 
 int max_b = CommandHand::hi_b;
 
+//kernel size for normal blur function
 int ksize = CommandHand::ksize;
 
+//thresh size for thresholding
 int thresh = CommandHand::thresh;
 
-
+//the "alternate main method" for debugging. Has sliders and visible binary mask.
 int rgb_debug::runDebug()
 {
+	//for getting images
 	cv::VideoCapture cap(0);
 	
 	cv::namedWindow("original mat", cv::WINDOW_NORMAL);
@@ -34,6 +38,8 @@ int rgb_debug::runDebug()
 	cv::Mat frame;
 	
 	cv::Mat frame_threshold;
+
+	//creates trackbars
 
 	cv::createTrackbar("Min R", "binary mat", &min_r, 255, on_min_r_thresh_trackbar);
 	
@@ -53,7 +59,10 @@ int rgb_debug::runDebug()
 	
 	cv::createTrackbar("Thresh", "binary mat", &thresh, 255, on_thresh_thresh_trackbar);
 
+	//main loop
+
 	while ((char)cv::waitKey(1) != 'q') {
+		//save the frame
 		cap >> frame;
 		
 		if (frame.empty())
@@ -75,11 +84,15 @@ int rgb_debug::runDebug()
 				frame_threshold
 		);
 		
+		//applies the blur filter only if ksize != 0.
+		//ability to disable filters allows ability to finetune each filter
+		//individually
 		if (ksize != 0)
 		{
 			cv::blur(frame_threshold, frame_threshold, cv::Size(ksize, ksize));
 		}
 		
+		//thresholding
 		if (thresh != 0)
 		{
 			cv::threshold(frame_threshold, frame_threshold, thresh, 255, cv::THRESH_BINARY);
@@ -91,6 +104,8 @@ int rgb_debug::runDebug()
 	}
 	return 0;
 }
+
+//many callback methods...
 
 void rgb_debug::on_min_r_thresh_trackbar(int, void *)
 {

@@ -7,10 +7,14 @@
 MyVideo::MyVideo()
 {
 	VideoCapture vc(0);
+
 	this->vc = vc;
+	
 	vc >> current_frame;
+
 	//create the Gesture Space.
 	int x_center = current_frame.cols/2;
+	
 	int y_center = current_frame.rows/2;
 	
 	
@@ -23,6 +27,7 @@ MyVideo::MyVideo()
 	 {
 		 cv::Mat m;
 		 vc >> m;
+		 //flips to achieve a mirror effect
 		 cv::flip(m, m, 1);
 		 current_frame = m;
 		 return true;
