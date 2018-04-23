@@ -28,6 +28,15 @@ QtGUI::QtGUI(QWidget *parent):
 	ui.KSizeSlider->setSliderPosition(20);
 	ui.ThresholdSlider->setSliderPosition(62);
 
+	// Initialize internal values
+	RMin = 185;
+	RMax = 255;
+	GMin = 141;
+	GMax = 255;
+	BMin = 105;
+	BMax = 255;
+	KSize = 20;
+	Threshold = 62;
 
 	// On pause button click call on_PauseButton_clicked
 	p_PauseButton = ui.PauseButton;
@@ -45,7 +54,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	// OpenCV to QImage datatype to display on labels
 	cv::inRange(*processed, cv::Scalar(BMin, GMin, RMin), cv::Scalar(BMax, GMax, RMax), *processed);
 	if (KSize > 0) cv::blur(*processed, *processed, cv::Size(KSize, KSize));
-	if (Thresh > 0) cv::threshold(*processed, *processed, Thresh, 255, 0);
+	if (Threshold > 0) cv::threshold(*processed, *processed, Threshold, 255, 0);
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images
@@ -72,6 +81,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	ui.KSizeValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
 	ui.ThresholdValue->clear();
 	ui.ThresholdValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
+
 	// Update internal values from sliders
 	RMax = ui.RedMaxSlider->value();
 	RMin = ui.RedMinSlider->value();
@@ -81,6 +91,9 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	BMin = ui.BlueMinSlider->value();
 	KSize = ui.KSizeSlider->value();
 	Threshold = ui.ThresholdSlider->value();
+
+	// Update Gesture data and Cursor position boxes
+	int CursorX = 
 }
 
 void QtGUI::on_PauseButton_clicked()

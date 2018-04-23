@@ -9,6 +9,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+#include "Windows.h"
+
 #include "Drawer.h"
 
 namespace GUI {
