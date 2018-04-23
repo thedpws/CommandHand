@@ -21,10 +21,12 @@ QtGUI::QtGUI(QWidget *parent):
 	// Set initial time
 	ui.LoopValue->appendPlainText(QString("20"));
 
+	/*
 	// Timer for UI responsivness
 	tmrTimer = new QTimer(this);
 	connect(tmrTimer, SIGNAL(timeout()), this, SLOT(processFrameAndUpdateGUI()));
 	tmrTimer->start(ui.LoopValue->toPlainText().toInt()); //ui->txtLoopTime->toPlainText().toInt() msec
+	*/
 
 	// Set slider initial values
 	ui.RedMinSlider->setSliderPosition(0);
@@ -39,21 +41,16 @@ QtGUI::QtGUI(QWidget *parent):
 
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
-	// Store current frame in raw feed
-	capture.read(raw);
-
 	// Check if successfully stored
-	if (raw.empty() == true)
+	if (raw->empty() || processed->empty())
 	{
 		return;
 	}
 
-	processed = Drawer::Draw(raw);
-
 	// OpenCV to QImage datatype to display on labels
-	cv::cvtColor(raw, raw, CV_BGR2RGB);
-	QImage qimgOriginal((uchar*)raw.data, raw.cols, raw.rows, raw.step, QImage::Format_RGB888); // for color images
-	QImage qimgProcessed((uchar*)processed.data, processed.cols, processed.rows, processed.step, QImage::Format_RGB888); // for grayscale images
+	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
+	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images
+	QImage qimgProcessed((uchar*)processed->data, processed->cols, processed->rows, processed->step, QImage::Format_RGB888); // for grayscale images
 
 	// Update images on GUI
 	ui.RawVideo->setPixmap(QPixmap::fromImage(qimgOriginal));

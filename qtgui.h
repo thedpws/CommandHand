@@ -38,7 +38,7 @@ private:
 	QImage qimgProcessed;
 	
 public slots:
-	void processFrameAndUpdateGUI();
+	void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed);
 	bool eventFilter(QObject *object, QEvent *event);
 
 private slots:

@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
 {
 	// Initialize Qt GUI
 	QApplication a(argc, argv);
-	QtGUI w();
-	w.show();
+	QtGUI* w = new QtGUI;
+	w->show();
 
 	//
 
@@ -51,6 +51,15 @@ int main(int argc, char *argv[])
 			//clk++;
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
+
+			Mat raw(curr);
+			current_gesture = gr.process(curr);
+			if (current_gesture == NULL) continue;
+			if (curr.empty()) break;
+			//if (currentGesture == NULL)
+			//Drawer::draw(curr, *currentGesture);
+			w->processFrameAndUpdateGUI(&raw, &curr);
+
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
