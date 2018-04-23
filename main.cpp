@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
 
-			Mat raw(curr);
+			Mat raw = curr.clone();
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
