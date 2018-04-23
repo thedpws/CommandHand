@@ -5,6 +5,7 @@
 #include <opencv2/highgui.hpp>
 
 #include "Gesture.h"
+#include "CommandHand.h"
 
 //#include "GestureRecognition.cpp"
 /*
@@ -22,17 +23,17 @@ private:
 
 	std::vector<std::vector<cv::Point>> gestures;
 	bool has[10];
-	int lo_r;
-	int hi_r;
+	int lo_r = CommandHand::lo_r;
+	int hi_r = CommandHand::hi_r;
 
-	int lo_g;
-	int hi_g;
+	int lo_g = CommandHand::lo_g;
+	int hi_g = CommandHand::hi_g;
 
-	int lo_b;
-	int hi_b;
+	int lo_b = CommandHand::lo_b;
+	int hi_b = CommandHand::hi_b;
 
-	int ksize;
-	int thresh;
+	int ksize = CommandHand::ksize;
+	int thresh = CommandHand::thresh;
 
 	void lo_r_trackbar(int, void*);
 	void hi_r_trackbar(int, void*);
