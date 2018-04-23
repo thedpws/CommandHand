@@ -3,13 +3,13 @@
 #include <opencv/highgui.h>
 
 #include <Windows.h>
-#include "MyVideo.h"
 #include <iostream>
+
+#include "MyVideo.h"
 #include "GestureRecognition.h"
 #include "Gesture.h"
 #include "Drawer.h"
 #include "CommandHand.h"
-
 #include "rgb_debug.h"
 
 #include "QtGUI.h"
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	QtGUI* w = new QtGUI;
 	w->show();
 
-	// 
+	//
 
 	if (CommandHand::debug)
 	{
@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		int clk = 0;
 
 		MyVideo mv;
 		VideoCapture vc(0);
@@ -45,13 +44,14 @@ int main(int argc, char *argv[])
 
 		GestureRecognition gr;
 
-		Gesture* currentGesture;
+		Gesture* current_gesture;
 
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
 			//clk++;
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
+<<<<<<< HEAD
 			Mat raw(curr);
 			currentGesture = gr.process(curr);
 			if (currentGesture == NULL) continue;
@@ -59,11 +59,18 @@ int main(int argc, char *argv[])
 			//if (currentGesture == NULL)
 			//Drawer::draw(curr, *currentGesture);
 			w->processFrameAndUpdateGUI(&raw, &curr);
+=======
+			current_gesture = gr.process(curr);
+			if (current_gesture == NULL) continue;
+			if (curr.empty()) break;
+			//if (current_gesture == NULL)
+			Drawer::draw(curr, *current_gesture);
+>>>>>>> 3cb382ebe579b3f3f5b669d4b88105a935328ce5
 			imshow("Video", curr);
 
 
 		}
 		return 0;
 	}
-	
+
 }
