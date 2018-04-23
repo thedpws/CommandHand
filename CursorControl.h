@@ -15,11 +15,16 @@ public:
 	
 	static void update(cv::Mat video_feed, Gesture g);
 private:
+
+	//sets the cursor position to the point "pos" on the USER'S SCREEN
 	static void setCursorPos(cv::Point pos);
 	
+	//maps POINT P from one set of dimensions to another set of dimensions
 	static cv::Point mapPoint(double x1, double y1, double x2, double y2, cv::Point p);
 	
+	//performs the left-click
 	static void cursorClick();
 
+	//finishes the left-click
 	static void cursorUnclick();
 };

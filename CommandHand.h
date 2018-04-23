@@ -5,6 +5,9 @@
 class CommandHand
 {
 public:
+
+	//gs == "gesture space"
+	//Gesture space is the area in the frame where the program looks for the gestures.
 	const static int gs_height = 300;
 	
 	const static int gs_width = 500;
@@ -13,12 +16,15 @@ public:
 	
 	const static int cs_width = 300;
 
+	//debug - set debug = true to open the debugging gui.
+	//debugging gui has RGB sliders to fine-tune the opencv in-range function
 	const static bool debug = false;
 	
 	const static int thresh = 62;
 
 	const static int ksize = 20;
 
+	//mins and maxs for opencv in-range function to create binary masks
 	const static int lo_r = 185;
 	
 	const static int hi_r = 255;

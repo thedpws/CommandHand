@@ -17,5 +17,6 @@
 class Drawer
 {
 public:
+	//this function draws on the mat the center of mass of the gesture and important info like gesture ID and coordinates.
 	static bool draw(cv::Mat &m, Gesture g);
 };

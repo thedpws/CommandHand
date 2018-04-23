@@ -1,10 +1,5 @@
-CC = g++
-CFLAGS = -g -Wall
-SRCS = main.cpp
-PROG = cmdhand.exe
+CFLAGS = 'pkg-config --cflags opencv'
+LIBS = 'pkg-config --libs opencv'
 
-OPENCV = `pkg-config opencv --cflags --libs`
-LIBS = C:\Users\azvas\Documents\opencv2\opencv\sources\include\opencv2
-
-$(PROG):$(SRCS)
-	$(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS)
+% : %.cpp
+	g++ $(CFLAGS) $(LIBS) -O $@ $<

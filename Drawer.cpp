@@ -16,6 +16,7 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 		return false;
 	}
 	
+	//draws a red dot, indicating the gesture's lcoation.
 	circle(m, *g.getPoint(), 5, *red, 5, 8, 0);
 
 	// Creates text for Gesture ID

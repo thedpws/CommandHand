@@ -5,19 +5,22 @@
 
 class Gesture{
 private:
+	//the center of mass of the gesture
 	cv::Point* p;
-	
+
+	//id of the gesture recognized by the program.
 	int id;
 public:
+	//constructor
 	Gesture();
 	
-	void update();
-	
+	//accessor methods
 	cv::Point* getPoint();
-	
-	void setPoint(cv::Point* p);
-	
+
 	int getID();
+
+	//mutator methods
+	void setPoint(cv::Point* p);
 	
 	bool setID(int id);
 };

@@ -4,10 +4,10 @@
 
 Gesture::Gesture()
 {
+	//default values for its center and id
 	p = new cv::Point(-1, -1);
 	id = -1;
 }
-void Gesture::update() {}
 
 //Returns the gesture's point
 cv::Point* Gesture::getPoint()

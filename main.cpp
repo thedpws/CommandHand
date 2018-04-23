@@ -19,14 +19,6 @@ using namespace cv;
 
 int main(int argc, char *argv[])
 {
-	// Initialize Qt GUI
-	//QApplication a(argc, argv);
-
-	//QtGUI* w = new QtGUI;
-	
-	//w->show();
-
-	// 
 
 	if (CommandHand::debug)
 	{
@@ -34,6 +26,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+		//internal clock for calculations
 		int clk = 0;
 
 		MyVideo mv;
