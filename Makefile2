@@ -1,0 +1,26 @@
+command-hand.exe: main.o CommandHand.o CursorControl.o Drawer.o Gesture.o GestureRecognition.o MyVideo.o QtGUI.o
+	g++ main.o  CommandHand.o CursorControl.o Drawer.o Gesture.o GestureRecognition.o MyVideo.o QtGUI.o -o command-hand.exe
+
+main.o: main.cpp Windows.h MyVideo.h GestureRecognition.h Gesture.h Drawer.h CursorControl.h rgb_debug.h QtGUI.h opencv.hpp highgui.h
+	g++ -c main.cpp
+
+CommandHand.o: CommandHand.h
+	g++ -c CommandHand.h
+
+CursorControl.o: CursorControl.cpp CursorControl.h CommandHand.h core.hpp highgui.hpp Gesture.h Windows.h
+	g++ -c CursorControl.cpp
+
+Drawer.o: Drawer.cpp Drawer.h string.h core.hpp highgui.hpp imgproc.hpp
+	g++ -c Drawer.cpp
+
+Gesture.o: Gesture.cpp Gesture.h imgproc.hpp highgui.hpp opencv.hpp
+	g++ -c Gesture.cpp
+
+GestureRecognition.o: GestureRecognition.cpp GestureRecognition.h core.hpp imgproc.hpp opencv.hpp highgui.hpp Gesture.h CommandHand.h imgcodecs.hpp matx.hpp types.hpp bufferpool.hpp mat.inl.hpp utility.hpp stdlib.h cv.h Windows.h shape_distance.hpp
+	g++ -c GestureRecognition.cpp
+
+MyVideo.o: MyVideo.cpp MyVideo.h CommandHand.h imgproc.hpp highgui.hpp
+	g++ -c MyVideo.cpp
+
+rgb_debug.o: rgb_debug.cpp rgb_debug.h CommandHand.h highgui.hpp opencv.hpp
+	g++ -c rgb_debug.cpp

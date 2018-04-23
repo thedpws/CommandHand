@@ -6,12 +6,18 @@
 class Gesture{
 private:
 	cv::Point* p;
+	
 	int id;
 public:
 	Gesture();
+	
 	void update();
+	
 	cv::Point* getPoint();
+	
 	void setPoint(cv::Point* p);
+	
 	int getID();
+	
 	bool setID(int id);
 };
