@@ -27,6 +27,7 @@ void moveCursor(cv::Mat videoFeed, Gesture g)
 }
 */
 
+/*
 void cursorClick()
 {
 	//creates a stream of inputs that is a left click on the mouse
@@ -37,5 +38,6 @@ void cursorClick()
 	inputs[1].type = INPUT_MOUSE;
 	inputs[1].mi.dwflags = MOUSEEVENTF_LEFTUP;
 	
-	SendInput(2, INPUTS, sizeof(INPUT);
+	SendInput(2, INPUTS, sizeof(INPUT));
 }
+*/
