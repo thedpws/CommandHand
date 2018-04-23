@@ -40,7 +40,17 @@ GestureRecognition::GestureRecognition()
 	for (int i = 0; i < 10; i++) has[i] = false;
 
 	//std::istringstream config_file(con)
-	
+	 lo_r = CommandHand::lo_r;
+	 hi_r = CommandHand::hi_r;
+
+	 lo_g = CommandHand::lo_g;
+	 hi_g = CommandHand::hi_g;
+
+	 lo_b = CommandHand::lo_b;
+	 hi_b = CommandHand::hi_b;
+
+	 ksize = CommandHand::ksize;
+	 thresh = CommandHand::thresh;
 
 }
 
