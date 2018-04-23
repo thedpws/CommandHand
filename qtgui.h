@@ -21,6 +21,13 @@ class QtGUI : public QMainWindow
 
 public:
 	QtGUI(QWidget *parent = Q_NULLPTR);
+	bool isPaused();
+	int getRMaxValue();
+	int getGMaxValue();
+	int getBMaxValue();
+	int getRMinValue();
+	int getGMinValue();
+	int getBMinValue();
 
 private:
 	Ui::QtGUIClass ui;
@@ -30,12 +37,23 @@ private:
 	cv::Mat raw;
 	cv::Mat processed;
 
-	// QTimer Class- Govern update cycle of GUI
-	QTimer *tmrTimer;
+	// Internal Slider Values
+	int RMax;
+	int RMin;
+	int GMax;
+	int GMin;
+	int BMax;
+	int BMin;
+
+	// Internal bool for the video feed
+	bool isPause;
 
 	// Qt Images
 	QImage qImgRaw;
 	QImage qimgProcessed;
+
+	// Pointer to push button
+	QPushButton *p_PauseButton;
 	
 public slots:
 	void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed);
