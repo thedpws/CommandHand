@@ -19,12 +19,15 @@ QtGUI::QtGUI(QWidget *parent):
 	}
 
 	// Set slider initial values
-	ui.RedMinSlider->setSliderPosition(0);
+	ui.RedMinSlider->setSliderPosition(185);
 	ui.RedMaxSlider->setSliderPosition(255);
-	ui.GreenMinSlider->setSliderPosition(0);
+	ui.GreenMinSlider->setSliderPosition(141);
 	ui.GreenMaxSlider->setSliderPosition(255);
-	ui.BlueMinSlider->setSliderPosition(0);
+	ui.BlueMinSlider->setSliderPosition(105);
 	ui.BlueMaxSlider->setSliderPosition(255);
+	ui.KSizeSlider->setSliderPosition(20);
+	ui.ThresholdSlider->setSliderPosition(62);
+
 
 	// On pause button click call on_PauseButton_clicked
 	p_PauseButton = ui.PauseButton;
@@ -62,13 +65,19 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	ui.BlueMaxValue->appendPlainText(QString::number(ui.BlueMaxSlider->value()));
 	ui.BlueMinValue->clear();
 	ui.BlueMinValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
-
+	ui.KSizeValue->clear();
+	ui.KSizeValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
+	ui.ThresholdValue->clear();
+	ui.ThresholdValue->appendPlainText(QString::number(ui.BlueMinSlider->value()));
+	// Update internal values from sliders
 	RMax = ui.RedMaxSlider->value();
 	RMin = ui.RedMinSlider->value();
 	GMax = ui.GreenMaxSlider->value();
 	GMin = ui.GreenMinSlider->value();
 	BMax = ui.BlueMaxSlider->value();
 	BMin = ui.BlueMinSlider->value();
+	KSize = ui.KSizeSlider->value();
+	Threshold = ui.ThresholdSlider->value();
 }
 
 void QtGUI::on_PauseButton_clicked()
@@ -145,4 +154,12 @@ int QtGUI::getGMinValue()
 int QtGUI::getBMinValue() 
 {
 	return BMin;
+}
+int QtGUI::getKSize()
+{
+	return KSize;
+}
+int QtGUI::getThreshold()
+{
+	return Threshold;
 }

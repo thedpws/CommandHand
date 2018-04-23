@@ -28,6 +28,8 @@ public:
 	int getRMinValue();
 	int getGMinValue();
 	int getBMinValue();
+	int getKSize();
+	int getThreshold();
 
 private:
 	Ui::QtGUIClass ui;
@@ -44,6 +46,10 @@ private:
 	int GMin;
 	int BMax;
 	int BMin;
+
+	// Internal K-Size and Threshold Values
+	int KSize;
+	int Threshold;
 
 	// Internal bool for the video feed
 	bool isPause;
