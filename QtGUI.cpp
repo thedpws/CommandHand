@@ -34,12 +34,15 @@ QtGUI::QtGUI(QWidget *parent):
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
 	// Check if successfully stored
-	if (raw->empty() || processed->empty())
+	if (raw == NULL || raw->empty() || processed == NULL || processed->empty())
 	{
 		return;
 	}
 
 	// OpenCV to QImage datatype to display on labels
+	cv::inRange(*processed, cv::Scalar(BMin, GMin, RMin), cv::Scalar(BMax, GMax, RMax), *processed);
+	cv::blur(*processed, *processed, cv::Size(KSize, KSize));
+	cv::threshold(*processed, *processed, Thresh, 255, 0);
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images

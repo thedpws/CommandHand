@@ -46,6 +46,7 @@ GestureRecognition::GestureRecognition()
 
 Gesture* GestureRecognition::process(cv::Mat &m)
 {
+
 	//roi - region of interest. this is the gesture space
 	cv::Mat roi(m, cv::Range(m.rows / 2 - CommandHand::gs_height / 2, m.rows / 2 + CommandHand::gs_height / 2), cv::Range(m.cols / 2 - CommandHand::gs_width / 2, m.cols / 2 + CommandHand::gs_width / 2));
 
@@ -55,7 +56,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	
 	cv::blur(roi, roi, cv::Size(ksize, ksize));
 	cv::threshold(roi, roi, thresh, 255, 0);
-	this->binary_mask = cv::Mat(roi.clone());
+
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -296,4 +297,12 @@ void GestureRecognition::setLoB(int i)
 cv::Mat GestureRecognition::getBinaryMask()
 {
 	return this->binary_mask;
+}
+void GestureRecognition::setKSize(int i)
+{
+	this->ksize = i;
+}
+void GestureRecognition::setThreshSize(int i)
+{
+	this->thresh = i;
 }

@@ -58,4 +58,7 @@ public:
 	void setLoG(int i);
 	void setHiB(int i);
 	void setLoB(int i);
+
+	void setKSize(int i);
+	void setThreshSize(int i);
 };
