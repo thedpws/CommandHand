@@ -1,7 +1,6 @@
 #include "GestureRecognition.h"
 #include "Gesture.h"
 #include "CommandHand.h"
-
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
@@ -40,52 +39,29 @@ GestureRecognition::GestureRecognition()
 	for (int i = 0; i < 10; i++) has[i] = false;
 
 	//std::istringstream config_file(con)
-	 lo_r = CommandHand::lo_r;
-	 hi_r = CommandHand::hi_r;
 
-	 lo_g = CommandHand::lo_g;
-	 hi_g = CommandHand::hi_g;
-
-	 lo_b = CommandHand::lo_b;
-	 hi_b = CommandHand::hi_b;
-
-	 ksize = CommandHand::ksize;
-	 thresh = CommandHand::thresh;
 
 }
 
 Gesture* GestureRecognition::process(cv::Mat &m)
 {
-
 	//roi - region of interest. this is the gesture space
 	cv::Mat roi(m, cv::Range(m.rows / 2 - CommandHand::gs_height / 2, m.rows / 2 + CommandHand::gs_height / 2), cv::Range(m.cols / 2 - CommandHand::gs_width / 2, m.cols / 2 + CommandHand::gs_width / 2));
 
 	cv::Mat src(roi);
 
-	inRange(src, cv::Scalar(lo_b, lo_g, lo_r), cv::Scalar(hi_b, hi_g, hi_r), roi);
-	
-	cv::blur(roi, roi, cv::Size(ksize, ksize));
-	cv::threshold(roi, roi, thresh, 255, CV_THRESH_BINARY);
+	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), roi);
 
-	cv::Mat binary_mask(m);
-	std::cout << "binarhy mask is done...writing to the class binary mask\n";
-	system("pause");
-	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows < m.rows / 2 + CommandHand::gs_height / 2; rows++)
-	{
-		for (int cols = m.cols / 2 - CommandHand::gs_width / 2; cols < m.cols / 2 + CommandHand::gs_width / 2; cols++)
-		{
-			binary_mask.at<cv::Vec3b>(rows, cols) = roi.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
-		}
-	}
-	this->binary_mask = binary_mask;
-
+	cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
+	cv::threshold(roi, roi, CommandHand::thresh, 255, 0);
+	cv::Mat binary_mask(roi);
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
 	cv::Canny(roi, canny_output, 100, 200, 3);
 	cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
-	
-	if (contours.empty()) return NULL;
+
+	if (contours.empty()) return new Gesture();
 
 	int i_largest_contour;
 	double largest_area = -1;
@@ -105,10 +81,10 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 
 	cv::Mat drawing = cv::Mat::zeros(canny_output.size(), CV_8UC3);
 	cv::Scalar color = cv::Scalar(255, 255, 255);
-	
+
 	//Drawing the largest contour
 	cv::drawContours(drawing, contours, i_largest_contour, cv::Scalar(225, 0, 0), 2, 8, hierarchy, 0, cv::Point());
-	
+
 	//storing the largest contour as hand_contour
 	std::vector<cv::Point> hand_contour = contours[i_largest_contour];
 
@@ -122,16 +98,16 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 			has[n] = true;
 		}
 	}
-	
+
 
 	//creating the convex hull.
 	std::vector<std::vector<cv::Point>> hull(1);
 	convexHull(cv::Mat(hand_contour), hull[0], false);
-	
+
 	//drawing the convex hull
 	cv::drawContours(drawing, hull, 0, cv::Scalar(255, 255, 255), 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
-	
-	
+
+
 	//creating clusters
 	std::vector<std::vector<cv::Point>> clusters;
 	double tolerance = 20;
@@ -148,11 +124,11 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 		}
 		bool has_cluster = false;
 		for (std::vector<cv::Point> cluster : clusters)
-		//for each cluster...
+			//for each cluster...
 		{
 			bool belongs_in_this_cluster = true;
 			for (int i = 0; i < cluster.size(); i++)
-			//for each point in the cluster
+				//for each point in the cluster
 			{
 				cv::Point p = cluster[i];
 				double dist = std::sqrt(std::pow(p.x - hull_index.x, 2) + std::pow(p.y - hull_index.y, 2));
@@ -199,7 +175,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	{
 		cv::circle(drawing, simplified_hull_indices[i], 10, cv::Scalar(0, 255, 0));
 	}
-	
+
 
 	//OVERWRITING THE MAT
 	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows < m.rows / 2 + CommandHand::gs_height / 2; rows++)
@@ -209,7 +185,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 			m.at<cv::Vec3b>(rows, cols) = drawing.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
 		}
 	}
-	
+
 	//object recognition
 	float nness[10];
 	for (int i = 0; i < 10; i++)
@@ -240,8 +216,8 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	if (least_dist > 1) gID = -1;
 
 	cv::Moments mm = cv::moments(hand_contour);
-	gX = mm.m10 / mm.m00 + m.cols / 2 - CommandHand::gs_width/2;
-	gY = mm.m01 / mm.m00 + m.rows / 2 - CommandHand::gs_height/2;
+	gX = mm.m10 / mm.m00 + m.cols / 2 - CommandHand::gs_width / 2;
+	gY = mm.m01 / mm.m00 + m.rows / 2 - CommandHand::gs_height / 2;
 
 	g->setID(gID);
 	g->setPoint(new cv::Point(gX, gY));

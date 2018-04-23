@@ -95,9 +95,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	Threshold = ui.ThresholdSlider->value();
 
 	// Update Gesture data and Cursor position boxes
-<<<<<<< HEAD
 	//int CursorX = 
-=======
 
 	/*
 	POINT cursorPos;
@@ -109,7 +107,6 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 	ui.GestureIDValue->appendPlainText(QString::number(gestureID));
 	*/
->>>>>>> f8ce2c5db35f263275f4a0e8bd0f4a73c53d3596
 }
 
 void QtGUI::on_PauseButton_clicked()

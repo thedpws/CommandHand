@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
 			Mat raw = curr.clone();
 
 			Mat to_be_processed = raw.clone();
+			/*
 			gr.setLoB(w->getBMinValue());
 			gr.setHiB(w->getBMaxValue());
 			gr.setLoG(w->getGMinValue());
@@ -66,6 +67,7 @@ int main(int argc, char *argv[])
 			gr.setHiR(w->getRMaxValue());
 			gr.setKSize(w->getKSize());
 			gr.setThreshSize(w->getThreshold());
+			*/
 
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
