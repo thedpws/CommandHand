@@ -51,21 +51,20 @@ int main(int argc, char *argv[])
 			//clk++;
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
-<<<<<<< HEAD
+
 			Mat raw(curr);
-			currentGesture = gr.process(curr);
-			if (currentGesture == NULL) continue;
+			current_gesture = gr.process(curr);
+			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
 			//if (currentGesture == NULL)
 			//Drawer::draw(curr, *currentGesture);
 			w->processFrameAndUpdateGUI(&raw, &curr);
-=======
+
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
 			//if (current_gesture == NULL)
 			Drawer::draw(curr, *current_gesture);
->>>>>>> 3cb382ebe579b3f3f5b669d4b88105a935328ce5
 			imshow("Video", curr);
 
 

@@ -13,12 +13,12 @@ public:
 
 	const static int ksize = 20;
 
-	const static uchar lo_r = 185;
-	const static uchar hi_r = 255;
-	const static uchar lo_g = 141;
-	const static uchar hi_g = 255;
-	const static uchar lo_b = 105;
-	const static uchar hi_b = 255;
+	const static int lo_r = 185;
+	const static int hi_r = 255;
+	const static int lo_g = 141;
+	const static int hi_g = 255;
+	const static int lo_b = 105;
+	const static int hi_b = 255;
 	
 	
 	/*
