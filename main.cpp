@@ -59,17 +59,9 @@ int main(int argc, char *argv[])
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
-			//if (currentGesture == NULL)
-			//Drawer::draw(curr, *currentGesture);
-			w->processFrameAndUpdateGUI(&raw, &curr);
-
-			current_gesture = gr.process(curr);
-			if (current_gesture == NULL) continue;
-			current_gesture = gr.process(curr);
-			if (current_gesture == NULL) continue;
-			if (curr.empty()) break;
-			//if (currentGesture == NULL)
 			Drawer::draw(curr, *current_gesture);
+			w->processFrameAndUpdateGUI(&raw, &gr.getBinaryMask());
+
 			imshow("Video", curr);
 
 			CursorControl::update(curr, *current_gesture);

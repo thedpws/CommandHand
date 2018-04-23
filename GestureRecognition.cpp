@@ -51,11 +51,11 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 
 	cv::Mat src(roi);
 
-	inRange(src, cv::Scalar(CommandHand::lo_b, CommandHand::lo_g, CommandHand::lo_r), cv::Scalar(CommandHand::hi_b, CommandHand::hi_g, CommandHand::hi_r), roi);
+	inRange(src, cv::Scalar(lo_b, lo_g, lo_r), cv::Scalar(hi_b, hi_g, hi_r), roi);
 	
-	cv::blur(roi, roi, cv::Size(CommandHand::ksize, CommandHand::ksize));
-	cv::threshold(roi, roi, CommandHand::thresh, 255, 0);
-	cv::Mat binary_mask(roi);
+	cv::blur(roi, roi, cv::Size(ksize, ksize));
+	cv::threshold(roi, roi, thresh, 255, 0);
+	this->binary_mask = cv::Mat(roi.clone());
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -267,4 +267,33 @@ void GestureRecognition::inRangeProcessing(cv::Mat* m)
 
 		}
 	}
+}
+
+void GestureRecognition::setLoR(int i)
+{
+	this->lo_r = i;
+}
+void GestureRecognition::setHiR(int i)
+{
+		this->hi_g = i;
+}
+void GestureRecognition::setLoG(int i)
+{
+	this->lo_g = i;
+}
+void GestureRecognition::setHiG(int i)
+{
+	this->hi_g = i;
+}
+void GestureRecognition::setHiB(int i)
+{
+	this->hi_b = i;
+}
+void GestureRecognition::setLoB(int i)
+{
+	this->lo_b = i;
+}
+cv::Mat GestureRecognition::getBinaryMask()
+{
+	return this->binary_mask;
 }

@@ -45,8 +45,16 @@ private:
 
 	std::vector<cv::Point> open_hand_contour;
 	std::vector<cv::Point> closed_hand_contour;
+	cv::Mat binary_mask;
 
 public:
 	GestureRecognition();
+	cv::Mat getBinaryMask();
 	Gesture* process(cv::Mat &m);
+	void setHiR(int i);
+	void setLoR(int i);
+	void setHiG(int i);
+	void setLoG(int i);
+	void setHiB(int i);
+	void setLoB(int i);
 };
