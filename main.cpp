@@ -56,20 +56,20 @@ int main(int argc, char *argv[])
 			curr = *mv.getFrame();
 
 			Mat raw = curr.clone();
+			Mat to_be_processed = raw.clone();
+			gr.setLoB(w->getBMinValue());
+			gr.setHiB(w->getBMaxValue());
+			gr.setLoG(w->getGMinValue());
+			gr.setHiG(w->getGMaxValue());
+			gr.setLoR(w->getRMinValue());
+			gr.setHiR(w->getRMaxValue());
+			gr.set
 			current_gesture = gr.process(curr);
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
-			//if (currentGesture == NULL)
-			//Drawer::draw(curr, *currentGesture);
-			w->processFrameAndUpdateGUI(&raw, &curr);
-
-			current_gesture = gr.process(curr);
-			if (current_gesture == NULL) continue;
-			current_gesture = gr.process(curr);
-			if (current_gesture == NULL) continue;
-			if (curr.empty()) break;
-			//if (currentGesture == NULL)
 			Drawer::draw(curr, *current_gesture);
+			w->processFrameAndUpdateGUI(&raw, &to_be_processed);
+
 			imshow("Video", curr);
 
 			CursorControl::update(curr, *current_gesture);
