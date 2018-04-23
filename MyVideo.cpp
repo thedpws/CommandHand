@@ -1,6 +1,6 @@
 #include "MyVideo.h"
 #include "CommandHand.h"
-
+#include <opencv2/imgproc.hpp>
 #include <iostream>
 
 
@@ -26,8 +26,10 @@ MyVideo::MyVideo()
 	 {
 
 		 vc >> current_frame;
-		 //if (debug)  rectangle(current_frame, *p_low, *p_high, *color, 5,8,0);
-		 //std::cout << p_high->x << std::endl;
+		 cv::Mat m;
+		 vc >> m;
+		 cv::flip(m, m, 1);
+		 current_frame = m;
 		 return true;
 	 }
 	 else

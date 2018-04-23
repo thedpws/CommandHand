@@ -10,6 +10,7 @@
 #include "Gesture.h"
 #include "Drawer.h"
 #include "CommandHand.h"
+#include "CursorControl.h"
 #include "rgb_debug.h"
 
 #include "QtGUI.h"
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
 
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
+
 			//clk++;
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
@@ -67,7 +69,8 @@ int main(int argc, char *argv[])
 			Drawer::draw(curr, *current_gesture);
 			imshow("Video", curr);
 
-
+			CursorControl::update(curr, *current_gesture);
+			if (GetKeyState('Q') & 0x8000) return 3;
 		}
 		return 0;
 	}

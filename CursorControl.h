@@ -11,10 +11,9 @@ class CursorControl
 public:
 	int getCursorX();
 	int getCursorY();
-	static void setCursor(cv::Mat videoFeed, cv::Point pos);
-	static void moveCursor(cv::Mat videoFeed, Gesture g);
-	static cv::Point mapPoint(int x1, int y1, int x2, int y2, cv::Point p);
-	static void cursorClick();
+	static void update(cv::Mat video_feed, Gesture g);
 private:
-	cv::Point cursorPos;
+	static void setCursorPos(cv::Point pos);
+	static cv::Point mapPoint(double x1, double y1, double x2, double y2, cv::Point p);
+	static void cursorClick();
 };
