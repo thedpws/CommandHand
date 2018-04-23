@@ -4,11 +4,11 @@
 using namespace cv;
 
 
-class MyVideo 
+class MyVideo
 {
 private:
 	VideoCapture vc;
-	Mat currentFrame;
+	Mat current_frame;
 	bool updateFrame();
 	int clk = 0;
 

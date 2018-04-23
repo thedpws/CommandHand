@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	//QtGUI w;
 	//w.show();
 
-	// 
+	//
 
 	if (CommandHand::debug)
 	{
@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		int clk = 0;
 
 		MyVideo mv;
 		VideoCapture vc(0);
@@ -45,23 +44,23 @@ int main(int argc, char *argv[])
 
 		GestureRecognition gr;
 
-		Gesture* currentGesture;
+		Gesture* current_gesture;
 
 		while (char(waitKey(1)) != 'q' && mv.isOpened())
 		{
 			//clk++;
 			//for showing the Mat -- eventually we will have it show on the debugging GUI
 			curr = *mv.getFrame();
-			currentGesture = gr.process(curr);
-			if (currentGesture == NULL) continue;
+			current_gesture = gr.process(curr);
+			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
-			//if (currentGesture == NULL)
-			Drawer::draw(curr, *currentGesture);
+			//if (current_gesture == NULL)
+			Drawer::draw(curr, *current_gesture);
 			imshow("Video", curr);
 
 
 		}
 		return 0;
 	}
-	
+
 }
