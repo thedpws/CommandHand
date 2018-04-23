@@ -1,4 +1,5 @@
 #include "qtgui.h"
+#include "CommandHand.h"
 
 QtGUI::QtGUI(QWidget *parent): 
 	QMainWindow(parent)
@@ -46,17 +47,18 @@ QtGUI::QtGUI(QWidget *parent):
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
 	// Check if successfully stored
+	processed = new cv::Mat(raw->clone());
 	if (raw == NULL || raw->empty() || processed == NULL || processed->empty())
 	{
 		return;
 	}
 
+
 	// OpenCV to QImage datatype to display on labels
-	cv::inRange(*processed, cv::Scalar(BMin, GMin, RMin), cv::Scalar(BMax, GMax, RMax), *processed);
-	if (this->KSize > 0) cv::blur(*processed, *processed, cv::Size(KSize, KSize));
-	if (Threshold > 0) cv::threshold(*processed, *processed, Threshold, 255, 0);
+
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
+
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images
 	QImage qimgProcessed((uchar*)processed->data, processed->cols, processed->rows, processed->step, QImage::Format_RGB888); // for grayscale images
 
@@ -93,7 +95,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	Threshold = ui.ThresholdSlider->value();
 
 	// Update Gesture data and Cursor position boxes
-	int CursorX = 
+	//int CursorX = 
 }
 
 void QtGUI::on_PauseButton_clicked()

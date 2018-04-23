@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 			curr = *mv.getFrame();
 
 			Mat raw = curr.clone();
+
 			Mat to_be_processed = raw.clone();
 			gr.setLoB(w->getBMinValue());
 			gr.setHiB(w->getBMaxValue());
@@ -70,7 +71,7 @@ int main(int argc, char *argv[])
 			if (current_gesture == NULL) continue;
 			if (curr.empty()) break;
 			Drawer::draw(curr, *current_gesture);
-			w->processFrameAndUpdateGUI(&raw, &to_be_processed);
+			//w->processFrameAndUpdateGUI(&raw, &curr);
 
 			imshow("Video", curr);
 

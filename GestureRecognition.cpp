@@ -65,7 +65,19 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	inRange(src, cv::Scalar(lo_b, lo_g, lo_r), cv::Scalar(hi_b, hi_g, hi_r), roi);
 	
 	cv::blur(roi, roi, cv::Size(ksize, ksize));
-	cv::threshold(roi, roi, thresh, 255, 0);
+	cv::threshold(roi, roi, thresh, 255, CV_THRESH_BINARY);
+
+	cv::Mat binary_mask(m);
+	std::cout << "binarhy mask is done...writing to the class binary mask\n";
+	system("pause");
+	for (int rows = m.rows / 2 - CommandHand::gs_height / 2; rows < m.rows / 2 + CommandHand::gs_height / 2; rows++)
+	{
+		for (int cols = m.cols / 2 - CommandHand::gs_width / 2; cols < m.cols / 2 + CommandHand::gs_width / 2; cols++)
+		{
+			binary_mask.at<cv::Vec3b>(rows, cols) = roi.at<cv::Vec3b>(rows - (m.rows / 2 - CommandHand::gs_height / 2), cols - (m.cols / 2 - CommandHand::gs_width / 2));
+		}
+	}
+	this->binary_mask = binary_mask;
 
 	cv::Mat canny_output;
 	std::vector<std::vector<cv::Point>> contours;
@@ -73,7 +85,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	cv::Canny(roi, canny_output, 100, 200, 3);
 	cv::findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
 	
-	if (contours.empty()) return new Gesture();
+	if (contours.empty()) return NULL;
 
 	int i_largest_contour;
 	double largest_area = -1;
