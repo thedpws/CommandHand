@@ -12,8 +12,8 @@
 
 #include "rgb_debug.h"
 
-//#include "QtGUI.h"
-//#include <QtWidgets/QApplication>
+#include "QtGUI.h"
+#include <QtWidgets/QApplication>
 
 using namespace std;
 using namespace cv;
@@ -22,9 +22,9 @@ using namespace cv;
 int main(int argc, char *argv[])
 {
 	// Initialize Qt GUI
-	//QApplication a(argc, argv);
-	//QtGUI w;
-	//w.show();
+	QApplication a(argc, argv);
+	QtGUI w();
+	w.show();
 
 	//
 

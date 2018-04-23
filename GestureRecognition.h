@@ -47,6 +47,7 @@ private:
 
 	std::vector<cv::Point> open_hand_contour;
 	std::vector<cv::Point> closed_hand_contour;
+
 public:
 	GestureRecognition();
 	Gesture* process(cv::Mat &m);
