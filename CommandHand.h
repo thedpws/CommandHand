@@ -8,7 +8,7 @@ public:
 
 	//gs == "gesture space"
 	//Gesture space is the area in the frame where the program looks for the gestures.
-	const static int gs_height = 300;
+	const static int gs_height = 400;
 	
 	const static int gs_width = 500;
 
@@ -25,15 +25,20 @@ public:
 	const static int ksize = 20;
 
 	//mins and maxs for opencv in-range function to create binary masks
-	const static int lo_r = 185;
-	
+	//Calibrated for the demo environment...
+	//	lamp on level 1 brightness
+	//against the front of room
+	//main light switch is off
+	//		still some other lights are on
+	const static int lo_r = 240;
+
 	const static int hi_r = 255;
 	
-	const static int lo_g = 141;
+	const static int lo_g = 165;
 	
 	const static int hi_g = 255;
 	
-	const static int lo_b = 105;
+	const static int lo_b = 159;
 	
 	const static int hi_b = 255;
 	
