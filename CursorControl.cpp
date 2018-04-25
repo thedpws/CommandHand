@@ -33,6 +33,15 @@ void CursorControl::setCursorPos(cv::Point p)
 
 void CursorControl::update(cv::Mat m, Gesture g)
 {
+	if (history == NULL)
+	{
+		int size = 10;
+		std::vector<cv::Point> history2(size);
+		history = &history2;
+		count = 0;
+	}
+
+
 	int x1 = m.cols;
 
 	int y1 = m.rows;
@@ -42,8 +51,15 @@ void CursorControl::update(cv::Mat m, Gesture g)
 	int y2 = GetSystemMetrics(SM_CYSCREEN);
 
 	cv::Point mapped = mapPoint(x1, y1, x2, y2, *g.getPoint());
-
-	SetCursorPos(mapped.x, mapped.y);
+	(*history)[count++ % sizeof(*history)] = mapped;
+	int x_avg, y_avg;
+	for (int i = 0; i < sizeof(*history); i++) {
+		x_avg += (*history)[i].x;
+		y_avg += (*history)[i].y;
+	}
+	x_avg /= sizeof(*history);
+	y_avg /= sizeof(*history);
+	SetCursorPos(x_avg, y_avg);
 	if (g.getID() == 0) cursorClick();
 	else cursorUnclick();
 }

@@ -16,6 +16,9 @@ public:
 	static void update(cv::Mat video_feed, Gesture g);
 private:
 
+	static std::vector<cv::Point>* history;
+	static int count;
+
 	//sets the cursor position to the point "pos" on the USER'S SCREEN
 	static void setCursorPos(cv::Point pos);
 	
