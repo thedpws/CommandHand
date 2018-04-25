@@ -18,11 +18,7 @@ public:
 private:
 
 	static std::vector<cv::Point> history;
-<<<<<<< HEAD
 	static const int HISTORY_SIZE = 20;
-=======
-	static const int HISTORY_SIZE = 10;
->>>>>>> c90d7ec9b29599534dce23c924e77f910e6d0fb8
 	static int count;
 
 	//sets the cursor position to the point "pos" on the USER'S SCREEN
