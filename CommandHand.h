@@ -8,6 +8,7 @@ public:
 
 	//gs == "gesture space"
 	//Gesture space is the area in the frame where the program looks for the gestures.
+	const static int gs_height = 400;
 	
 	const static int gs_width = 500;
 
