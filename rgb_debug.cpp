@@ -34,6 +34,7 @@ int rgb_debug::runDebug()
 	cv::namedWindow("original mat", cv::WINDOW_NORMAL);
 	
 	cv::namedWindow("binary mat", cv::WINDOW_NORMAL);
+	cv::namedWindow("debug", cv::WINDOW_NORMAL);
 	
 	cv::Mat frame;
 	
@@ -41,23 +42,23 @@ int rgb_debug::runDebug()
 
 	//creates trackbars
 
-	cv::createTrackbar("Min R", "binary mat", &min_r, 255, on_min_r_thresh_trackbar);
+	cv::createTrackbar("Min R", "debug", &min_r, 255, on_min_r_thresh_trackbar);
 	
-	cv::createTrackbar("Max R", "binary mat", &max_r, 255, on_max_r_thresh_trackbar);
+	cv::createTrackbar("Max R", "debug", &max_r, 255, on_max_r_thresh_trackbar);
 	
-	cv::createTrackbar("Min G", "binary mat", &min_g, 255, on_min_g_thresh_trackbar);
+	cv::createTrackbar("Min G", "debug", &min_g, 255, on_min_g_thresh_trackbar);
 	
-	cv::createTrackbar("Max G", "binary mat", &max_g, 255, on_max_g_thresh_trackbar);
+	cv::createTrackbar("Max G", "debug", &max_g, 255, on_max_g_thresh_trackbar);
 	
-	cv::createTrackbar("Min B", "binary mat", &min_b, 255, on_min_b_thresh_trackbar);
+	cv::createTrackbar("Min B", "debug", &min_b, 255, on_min_b_thresh_trackbar);
 	
-	cv::createTrackbar("Max B", "binary mat", &max_b, 255, on_max_b_thresh_trackbar);
+	cv::createTrackbar("Max B", "debug", &max_b, 255, on_max_b_thresh_trackbar);
 
-	cv::createTrackbar("Ksize", "binary mat", &ksize, 255, on_ksize_thresh_trackbar);
+	cv::createTrackbar("Ksize", "debug", &ksize, 255, on_ksize_thresh_trackbar);
 
-	//cv::createTrackbar("Max thresh", "binary mat", &max_thresh, 255, on_max_thresh_thresh_trackbar);
+	//cv::createTrackbar("Max thresh", "debug", &max_thresh, 255, on_max_thresh_thresh_trackbar);
 	
-	cv::createTrackbar("Thresh", "binary mat", &thresh, 255, on_thresh_thresh_trackbar);
+	cv::createTrackbar("Thresh", "debug", &thresh, 255, on_thresh_thresh_trackbar);
 
 	//main loop
 

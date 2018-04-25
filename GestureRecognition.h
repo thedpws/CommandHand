@@ -43,19 +43,6 @@ private:
 	
 	//thresholding size
 	int thresh = CommandHand::thresh;
-	
-	//callback methods
-	void lo_r_trackbar(int, void*);
-	
-	void hi_r_trackbar(int, void*);
-	
-	void lo_g_trackbar(int, void*);
-	
-	void hi_g_trackbar(int, void*);
-	
-	void lo_b_trackbar(int, void*);
-	
-	void hi_b_trackbar(int, void*);
 
 	void inRangeProcessing(cv::Mat* m);
 	

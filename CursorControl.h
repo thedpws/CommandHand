@@ -17,13 +17,13 @@ public:
 private:
 
 	static std::vector<cv::Point> history;
-	static const int history_size = 10;
+	static const int HISTORY_SIZE = 20;
 	static int count;
 
 	//sets the cursor position to the point "pos" on the USER'S SCREEN
 	static void setCursorPos(cv::Point pos);
 	
-	//maps POINT P from one set of dimensions to another seof dimtensions
+	//maps POINT P from one set of dimensions to another set of dimensions
 	static cv::Point mapPoint(double x1, double y1, double x2, double y2, cv::Point p);
 	
 	//performs the left-click
