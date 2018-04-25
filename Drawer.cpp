@@ -119,5 +119,4 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	std::string TextToPrint;
 	
 	int fontFace = FONT_HERSHEY_SCRIPT_SIMPLEX;
-
 }

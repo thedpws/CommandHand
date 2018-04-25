@@ -34,6 +34,8 @@ int rgb_debug::runDebug()
 	cv::namedWindow("original mat", cv::WINDOW_NORMAL);
 	
 	cv::namedWindow("binary mat", cv::WINDOW_NORMAL);
+
+	cv::namedWindow("binary mat2", cv::WINDOW_NORMAL);
 	
 	cv::Mat frame;
 	
@@ -100,7 +102,7 @@ int rgb_debug::runDebug()
 
 		cv::imshow("original mat", frame);
 
-		cv::imshow("binary mat", frame_threshold);
+		cv::imshow("binary mat2", frame_threshold);
 	}
 	return 0;
 }

@@ -19,7 +19,7 @@ cv::Point CursorControl::mapPoint(
 	double kx = 4;
 
 	//y-axis multiplier
-	double ky = 10;
+	double ky = 5;
 
 	//formulas for x and y
 	//this code ensures a consistent ratio between the two sets of dimensions (camera dimensions and screen dimensions)
