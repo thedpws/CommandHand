@@ -104,10 +104,12 @@ int main(int argc, char *argv[])
 			CursorControl::update(curr, *current_gesture);
 			
 			//Q key will stop the program
+			
 			if (GetKeyState('Q') & 0x8000)
 			{
 				return 3;
 			}
+			
 		}
 		return 0;
 	}

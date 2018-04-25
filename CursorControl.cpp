@@ -1,8 +1,14 @@
 #include "CursorControl.h"
 #include "CommandHand.h"
 
+
+std::vector<cv::Point> CursorControl::history;
+int CursorControl::count = 0;
+
+
 //Given x and y coordinates of two different sized screens, return new coordinates that maps
 //and scales what the display on the first screen is showing onto the second screen
+
 cv::Point CursorControl::mapPoint(
 		double x1, double y1,
 		double x2, double y2,
@@ -33,6 +39,7 @@ void CursorControl::setCursorPos(cv::Point p)
 
 void CursorControl::update(cv::Mat m, Gesture g)
 {
+
 	int x1 = m.cols;
 
 	int y1 = m.rows;
@@ -43,7 +50,27 @@ void CursorControl::update(cv::Mat m, Gesture g)
 
 	cv::Point mapped = mapPoint(x1, y1, x2, y2, *g.getPoint());
 
-	SetCursorPos(mapped.x, mapped.y);
+	if (count < CursorControl::HISTORY_SIZE)
+	{
+		history.push_back(mapped);
+	}
+	else
+	{
+		history[count % CursorControl::HISTORY_SIZE] = mapped;
+	}
+	count++;
+	double x = 0;
+	double y = 0;
+	for (int i = 0; i < ((count < CursorControl::HISTORY_SIZE) ? count : CursorControl::HISTORY_SIZE); i++)
+	{
+		x += history[i].x;
+		y += history[i].y;
+	}
+	x /= CursorControl::HISTORY_SIZE;
+	y /= CursorControl::HISTORY_SIZE;
+
+	SetCursorPos(x, y);
+
 	if (g.getID() == 0) cursorClick();
 	else cursorUnclick();
 }
