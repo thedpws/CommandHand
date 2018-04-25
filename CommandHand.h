@@ -31,11 +31,11 @@ public:
 	
 	const static int lo_g = 165;
 	
-	const static int hi_g = 255;
+	const static int hi_g = 253;
 	
 	const static int lo_b = 159;
 	
-	const static int hi_b = 255;
+	const static int hi_b = 253;
 	
 	
 	//settings for AZ's bedroom's lighting
