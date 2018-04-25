@@ -1,8 +1,14 @@
 #include "CursorControl.h"
 #include "CommandHand.h"
 
+
+std::vector<cv::Point> CursorControl::history;
+int CursorControl::count = 0;
+
+
 //Given x and y coordinates of two different sized screens, return new coordinates that maps
 //and scales what the display on the first screen is showing onto the second screen
+
 cv::Point CursorControl::mapPoint(
 		double x1, double y1,
 		double x2, double y2,
@@ -33,14 +39,6 @@ void CursorControl::setCursorPos(cv::Point p)
 
 void CursorControl::update(cv::Mat m, Gesture g)
 {
-	if (history == NULL)
-	{
-		int size = 10;
-		std::vector<cv::Point> history2(size);
-		history = &history2;
-		count = 0;
-	}
-
 
 	int x1 = m.cols;
 
@@ -51,15 +49,28 @@ void CursorControl::update(cv::Mat m, Gesture g)
 	int y2 = GetSystemMetrics(SM_CYSCREEN);
 
 	cv::Point mapped = mapPoint(x1, y1, x2, y2, *g.getPoint());
-	(*history)[count++ % sizeof(*history)] = mapped;
-	int x_avg, y_avg;
-	for (int i = 0; i < sizeof(*history); i++) {
-		x_avg += (*history)[i].x;
-		y_avg += (*history)[i].y;
+
+	if (count < CursorControl::HISTORY_SIZE)
+	{
+		history.push_back(mapped);
 	}
-	x_avg /= sizeof(*history);
-	y_avg /= sizeof(*history);
-	SetCursorPos(x_avg, y_avg);
+	else
+	{
+		history[count % CursorControl::HISTORY_SIZE] = mapped;
+	}
+	count++;
+	double x = 0;
+	double y = 0;
+	for (int i = 0; i < ((count < CursorControl::HISTORY_SIZE) ? count : CursorControl::HISTORY_SIZE); i++)
+	{
+		x += history[i].x;
+		y += history[i].y;
+	}
+	x /= CursorControl::HISTORY_SIZE;
+	y /= CursorControl::HISTORY_SIZE;
+
+	SetCursorPos(x, y);
+
 	if (g.getID() == 0) cursorClick();
 	else cursorUnclick();
 }

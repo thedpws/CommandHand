@@ -16,13 +16,14 @@ public:
 	static void update(cv::Mat video_feed, Gesture g);
 private:
 
-	static std::vector<cv::Point>* history;
+	static std::vector<cv::Point> history;
+	static const int history_size = 10;
 	static int count;
 
 	//sets the cursor position to the point "pos" on the USER'S SCREEN
 	static void setCursorPos(cv::Point pos);
 	
-	//maps POINT P from one set of dimensions to another set of dimensions
+	//maps POINT P from one set of dimensions to another seof dimtensions
 	static cv::Point mapPoint(double x1, double y1, double x2, double y2, cv::Point p);
 	
 	//performs the left-click
