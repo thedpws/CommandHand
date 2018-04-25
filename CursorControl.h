@@ -6,6 +6,7 @@
 #include "Gesture.h"
 #include "Windows.h"
 
+
 class CursorControl
 {
 public:
@@ -17,7 +18,7 @@ public:
 private:
 
 	static std::vector<cv::Point> history;
-	static const int history_size = 10;
+	static const int HISTORY_SIZE = 10;
 	static int count;
 
 	//sets the cursor position to the point "pos" on the USER'S SCREEN

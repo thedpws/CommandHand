@@ -64,7 +64,7 @@ QtGUI::QtGUI(QWidget *parent):
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
 	// Check if successfully stored
-	processed = new cv::Mat(raw->clone());
+	//processed = new cv::Mat(raw->clone());
 
 	if (raw == NULL || raw->empty() || processed == NULL || processed->empty())
 	{
@@ -73,7 +73,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 
 	// OpenCV to QImage datatype to display on labels
-
+	// Converts from BGR to RGB arrays
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
@@ -81,11 +81,14 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images
 
 	QImage qimgProcessed((uchar*)processed->data, processed->cols, processed->rows, processed->step, QImage::Format_RGB888); // for grayscale images
-	
+
 	// Update images on GUI
 	ui.RawVideo->setPixmap(QPixmap::fromImage(qimgOriginal));
 
 	ui.ProcessedVideo->setPixmap(QPixmap::fromImage(qimgProcessed));
+
+	// Converts processed Mat back to BGR for use outside of function
+	cv::cvtColor(*processed, *processed, CV_RGB2BGR);
 
 	// Update text boxes based on sliders
 	ui.RedMaxValue->clear();
