@@ -1,9 +1,10 @@
 #include "qtgui.h"
+#include "ui_QtGUI.h"
 #include "CommandHand.h"
 
 QtGUI::QtGUI(QWidget *parent):
 	QMainWindow(parent)
-	//,ui(new GUI::QtGUI)
+	//ui(new Ui::QtGUI)
 {
 	ui.setupUi(this);
 
@@ -20,6 +21,7 @@ QtGUI::QtGUI(QWidget *parent):
 	}
 
 	// Set slider initial values
+	
 	ui.RedMinSlider->setSliderPosition(185);
 
 	ui.RedMaxSlider->setSliderPosition(255);
@@ -35,7 +37,7 @@ QtGUI::QtGUI(QWidget *parent):
 	ui.KSizeSlider->setSliderPosition(20);
 
 	ui.ThresholdSlider->setSliderPosition(62);
-
+	
 	// Initialize internal values
 	RMin = 185;
 
@@ -54,9 +56,9 @@ QtGUI::QtGUI(QWidget *parent):
 	Threshold = 62;
 
 	// On pause button click call on_PauseButton_clicked
-	p_PauseButton = ui.PauseButton;
+	//p_PauseButton = ui.PauseButton;
 
-	connect(p_PauseButton, SIGNAL(clicked()), this, SLOT(on_PauseButton_clicked()));
+	//connect(p_PauseButton, SIGNAL(clicked()), this, SLOT(on_PauseButton_clicked()));
 }
 
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
@@ -79,12 +81,11 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	QImage qimgOriginal((uchar*)raw->data, raw->cols, raw->rows, raw->step, QImage::Format_RGB888); // for color images
 
 	QImage qimgProcessed((uchar*)processed->data, processed->cols, processed->rows, processed->step, QImage::Format_RGB888); // for grayscale images
-
+	
 	// Update images on GUI
 	ui.RawVideo->setPixmap(QPixmap::fromImage(qimgOriginal));
 
 	ui.ProcessedVideo->setPixmap(QPixmap::fromImage(qimgProcessed));
-
 
 	// Update text boxes based on sliders
 	ui.RedMaxValue->clear();
@@ -137,7 +138,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 	Threshold = ui.ThresholdSlider->value();
 
-
+	
 	// Update Gesture data and Cursor position boxes
 	//int CursorX =
 
@@ -153,6 +154,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	*/
 }
 
+/*
 void QtGUI::on_PauseButton_clicked()
 {
 	isPause = !isPause;
@@ -210,6 +212,7 @@ bool QtGUI::eventFilter(QObject *object, QEvent *event)
 	}
 	return QMainWindow::eventFilter(object, event);
 }
+*/
 
 bool QtGUI::isPaused()
 {

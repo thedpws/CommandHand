@@ -4,13 +4,13 @@
 #include <QtCore>
 #include "ui_QtGUI.h"
 #include <QTimer>
+#include <QPushButton>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include "Windows.h"
-
 #include "Drawer.h"
 
 namespace GUI {
@@ -79,14 +79,14 @@ private:
 	QImage qimgProcessed;
 
 	// Pointer to push button
-	QPushButton *p_PauseButton;
+	QPushButton* p_PauseButton;
 
 public slots:
 	void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed);
 
-	bool eventFilter(QObject *object, QEvent *event);
+	//bool eventFilter(QObject *object, QEvent *event);
 
 private slots:
-	void on_PauseButton_clicked();
+	//void on_PauseButton_clicked();
 
 };
