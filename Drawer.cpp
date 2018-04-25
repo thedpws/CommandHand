@@ -60,7 +60,11 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	
 	char cursor_coords[50];
 	
-	sprintf_success = std::sprintf(cursor_coords, "Cursor at (%d,%d)", 50, 50);
+	// Get position of cursor as point (from Windows.h)
+	POINT cursorPos;
+	GetCursorPos(&cursorPos);
+	
+	sprintf_success = std::sprintf(cursor_coords, "Cursor at (%d,%d)", cursorPos.x, cursorPos.y);
 	
 	text_size = cv::getTextSize(cursor_coords, font_face, TEXT_SCALING, TEXT_THICCNESS, &baseline);
 	

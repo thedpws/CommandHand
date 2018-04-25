@@ -19,6 +19,10 @@ using namespace cv;
 
 int main(int argc, char *argv[])
 {
+	// Initialize QtGUI
+	QApplication a(argc, argv);
+	QtGUI w;
+	w.show();
 
 	if (CommandHand::debug)
 	{
@@ -58,23 +62,23 @@ int main(int argc, char *argv[])
 
 			//image file with processing
 			Mat to_be_processed = raw.clone();
-			/*
-			gr.setLoB(w->getBMinValue());
 			
-			gr.setHiB(w->getBMaxValue());
+			gr.setLoB(w.getBMinValue());
 			
-			gr.setLoG(w->getGMinValue());
+			gr.setHiB(w.getBMaxValue());
 			
-			gr.setHiG(w->getGMaxValue());
+			gr.setLoG(w.getGMinValue());
 			
-			gr.setLoR(w->getRMinValue());
+			gr.setHiG(w.getGMaxValue());
 			
-			gr.setHiR(w->getRMaxValue());
+			gr.setLoR(w.getRMinValue());
 			
-			gr.setKSize(w->getKSize());
+			gr.setHiR(w.getRMaxValue());
 			
-			gr.setThreshSize(w->getThreshold());
-			*/
+			gr.setKSize(w.getKSize());
+			
+			gr.setThreshSize(w.getThreshold());
+			
 			
 			//send the image to "GestureRecognition" and return a gesture
 			current_gesture = gr.process(curr);
@@ -92,7 +96,7 @@ int main(int argc, char *argv[])
 			//draw the center of mass + debug info
 			Drawer::draw(curr, *current_gesture);
 			
-			//w->processFrameAndUpdateGUI(&raw, &curr);
+			w.processFrameAndUpdateGUI(&raw, &curr);
 
 			//display the video feed
 			imshow("Video", curr);

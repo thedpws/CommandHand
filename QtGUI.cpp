@@ -1,9 +1,10 @@
 #include "qtgui.h"
+#include "ui_QtGUI.h"
 #include "CommandHand.h"
 
 QtGUI::QtGUI(QWidget *parent):
 	QMainWindow(parent)
-	//,ui(new GUI::QtGUI)
+	//ui(new Ui::QtGUI)
 {
 	ui.setupUi(this);
 
@@ -20,6 +21,7 @@ QtGUI::QtGUI(QWidget *parent):
 	}
 
 	// Set slider initial values
+	
 	ui.RedMinSlider->setSliderPosition(185);
 
 	ui.RedMaxSlider->setSliderPosition(255);
@@ -35,7 +37,7 @@ QtGUI::QtGUI(QWidget *parent):
 	ui.KSizeSlider->setSliderPosition(20);
 
 	ui.ThresholdSlider->setSliderPosition(62);
-
+	
 	// Initialize internal values
 	RMin = 185;
 
@@ -54,15 +56,15 @@ QtGUI::QtGUI(QWidget *parent):
 	Threshold = 62;
 
 	// On pause button click call on_PauseButton_clicked
-	p_PauseButton = ui.PauseButton;
+	//p_PauseButton = ui.PauseButton;
 
-	connect(p_PauseButton, SIGNAL(clicked()), this, SLOT(on_PauseButton_clicked()));
+	//connect(p_PauseButton, SIGNAL(clicked()), this, SLOT(on_PauseButton_clicked()));
 }
 
 void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 {
 	// Check if successfully stored
-	processed = new cv::Mat(raw->clone());
+	//processed = new cv::Mat(raw->clone());
 
 	if (raw == NULL || raw->empty() || processed == NULL || processed->empty())
 	{
@@ -71,7 +73,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 
 	// OpenCV to QImage datatype to display on labels
-
+	// Converts from BGR to RGB arrays
 	cv::cvtColor(*raw, *raw, CV_BGR2RGB);
 
 	cv::cvtColor(*processed, *processed, CV_BGR2RGB);
@@ -85,6 +87,8 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 	ui.ProcessedVideo->setPixmap(QPixmap::fromImage(qimgProcessed));
 
+	// Converts processed Mat back to BGR for use outside of function
+	cv::cvtColor(*processed, *processed, CV_RGB2BGR);
 
 	// Update text boxes based on sliders
 	ui.RedMaxValue->clear();
@@ -137,7 +141,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 
 	Threshold = ui.ThresholdSlider->value();
 
-
+	
 	// Update Gesture data and Cursor position boxes
 	//int CursorX =
 
@@ -153,6 +157,7 @@ void QtGUI::processFrameAndUpdateGUI(cv::Mat* raw, cv::Mat* processed)
 	*/
 }
 
+/*
 void QtGUI::on_PauseButton_clicked()
 {
 	isPause = !isPause;
@@ -210,6 +215,7 @@ bool QtGUI::eventFilter(QObject *object, QEvent *event)
 	}
 	return QMainWindow::eventFilter(object, event);
 }
+*/
 
 bool QtGUI::isPaused()
 {

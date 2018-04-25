@@ -9,6 +9,8 @@
 
 #include <string.h>
 
+#include <Windows.h>
+
 #define FONT_HERSHEY_SCRIPT_SIMPLEX 2
 #define TEXT_SCALING 1
 #define TEXT_THICCNESS 1
