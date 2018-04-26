@@ -5,7 +5,7 @@
 Gesture::Gesture()
 {
 	//default values for its center and id
-	p = new cv::Point(-1, -1);
+	p = new cv::Point(350, 250);
 	id = -1;
 }
 
