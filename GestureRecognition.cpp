@@ -328,6 +328,7 @@ Gesture* GestureRecognition::process(cv::Mat &m)
 	Gesture* g = new Gesture();
 
 	int gID, gX, gY;
+	gID = -1;
 	
 	//iterates through the array of similarity and finds the best fit
 	//assigning the best-fit ID to the gesture

@@ -100,7 +100,8 @@ int main(int argc, char *argv[])
 
 			//display the video feed
 			imshow("Video", curr);
-
+			std::cout << w.getBMaxValue() << std::endl;
+			std::cout << 9 << std::endl;
 			CursorControl::update(curr, *current_gesture);
 			
 			//Q key will stop the program

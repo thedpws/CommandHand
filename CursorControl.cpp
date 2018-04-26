@@ -34,7 +34,7 @@ cv::Point CursorControl::mapPoint(
 
 void CursorControl::setCursorPos(cv::Point p)
 {
-	SetCursorPos(p.x, p.y);
+	//SetCursorPos(p.x, p.y);
 }
 
 void CursorControl::update(cv::Mat m, Gesture g)
@@ -69,7 +69,7 @@ void CursorControl::update(cv::Mat m, Gesture g)
 	x /= CursorControl::HISTORY_SIZE;
 	y /= CursorControl::HISTORY_SIZE;
 
-	SetCursorPos(x, y);
+	setCursorPos(cv::Point(x, y));
 
 	if (g.getID() == 0) cursorClick();
 	else cursorUnclick();

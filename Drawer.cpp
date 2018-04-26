@@ -11,11 +11,6 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	//draw a circle around the coordinates of the gesture.
 	Scalar* red = new Scalar(0, 0, 255);
 	
-	if (g.getID() == -1)
-	{
-		return false;
-	}
-	
 	//draws a red dot, indicating the gesture's lcoation.
 	circle(m, *g.getPoint(), 5, *red, 5, 8, 0);
 
@@ -41,7 +36,7 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	text_origin.x = mat_size_x - text_size.width;
 	
 	text_origin.y = mat_size_y;
-	
+	/*
 	putText(
 		m, 
 		text_to_print, 
@@ -54,6 +49,7 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 			0.f
 		), 
 		TEXT_THICCNESS, 8);
+		*/
 
 	// Generates Cursor Coordinate Text
 	int sprintf_success;
@@ -123,5 +119,5 @@ bool Drawer::draw(cv::Mat &m, Gesture g)
 	std::string TextToPrint;
 	
 	int fontFace = FONT_HERSHEY_SCRIPT_SIMPLEX;
-
+	return true;
 }
