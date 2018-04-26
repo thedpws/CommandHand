@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 			return -1;
 		}
 
-		namedWindow("Video");
+		//namedWindow("Video");
 		
 		Mat curr;
 
@@ -99,9 +99,7 @@ int main(int argc, char *argv[])
 			w.processFrameAndUpdateGUI(&raw, &curr);
 
 			//display the video feed
-			imshow("Video", curr);
-			std::cout << w.getBMaxValue() << std::endl;
-			std::cout << 9 << std::endl;
+			//imshow("Video", curr);
 			CursorControl::update(curr, *current_gesture);
 			
 			//Q key will stop the program

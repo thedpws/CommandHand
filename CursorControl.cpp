@@ -34,7 +34,7 @@ cv::Point CursorControl::mapPoint(
 
 void CursorControl::setCursorPos(cv::Point p)
 {
-	//SetCursorPos(p.x, p.y);
+	SetCursorPos(p.x, p.y);
 }
 
 void CursorControl::update(cv::Mat m, Gesture g)
