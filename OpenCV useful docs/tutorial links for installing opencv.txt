@@ -1,3 +1,0 @@
-https://docs.opencv.org/3.0-beta/doc/tutorials/introduction/windows_visual_studio_Opencv/windows_visual_studio_Opencv.html#windows-visual-studio-how-to
-https://www.youtube.com/watch?v=l4372qtZ4dc
-https://stackoverflow.com/questions/43786856/how-can-i-install-configure-opencv3-2-0-with-c-visual-studio-2017
